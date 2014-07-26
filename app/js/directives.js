@@ -104,6 +104,51 @@ uiControls.directive('validate', function () {
         }
     };
 });
+uiControls.directive('error', function ($translate) {
+    return {
+        restrict: 'A',
+        scope:{
+            error:'='
+        },
+        template:'<div class="validation-error">{{errMsg}}</div>',
+        link: function (scope, element, attrs) {
+            var setErrMsg = function() {
+                if (!scope.error.HasError) {
+                    scope.errMsg = undefined;
+                    return
+                }
+
+                if (scope.error.TranslateArgs == undefined) {
+                    scope.errMsg = scope.error.ErrorMessage;
+                    return;
+
+                }
+                $translate(scope.error.TranslateArgs.TranslateId).then(function (errMsg) {
+                    if (scope.error.TranslateArgs.CustomMessage != undefined){
+                        scope.errMsg = scope.error.TranslateArgs.CustomMessage(JSON.parse(errMsg), scope.error.TranslateArgs.MessageArgs);
+                    }else {
+                        scope.errMsg = Validation.StringFce.format(errMsg, scope.error.TranslateArgs.MessageArgs);
+                    }},
+                    function (reason) {
+                        alert(reason);
+                    }
+                )
+
+
+
+
+            }
+
+            setErrMsg();
+            scope.$watch('error.HasError', function (newValue, oldValue, scope)
+            {
+                setErrMsg();
+            }, true);
+
+
+       }
+    };
+});
 
 uiControls.directive('dateMask', function () {
     return {

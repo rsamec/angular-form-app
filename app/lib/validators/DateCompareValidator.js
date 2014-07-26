@@ -25,7 +25,7 @@
 *  //create validator
 *  var validator = new dateCompareValidator();
 *  validator.CompareTo = new Date(2000,2,2);
-*  validator.CompareOperator = Validation.CompareOperator.LessThanEqual;
+*  validator.FromOperator = Validation.FromOperator.LessThanEqual;
 *
 *
 *  //less more than month -> return true

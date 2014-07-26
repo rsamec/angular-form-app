@@ -82,10 +82,18 @@ var VacationApprovalCtrl = (function (_super) {
             formatYear: 'yy',
             startingDay: 1
         };
+
+        $scope.days = function () {
+            var from = moment($scope.model.Data.Duration.From);
+            var to = moment($scope.model.Data.Duration.To);
+            if (!from.isValid() || !to.isValid())
+                return undefined;
+            return moment.duration(to.startOf('days').diff(from.startOf('days'))).days();
+        };
     }
     return VacationApprovalCtrl;
 })(DocCtrl);
-angular.module('myApp.controllers', []).controller('VacationApprovalCtrl', ['$scope', 'docInstance', 'param', VacationApprovalCtrl]).controller('ErrorCtrl', function ($scope) {
+angular.module('myApp.controllers', []).controller('VacationApprovalCtrl', ['$scope', 'docInstance', 'param', VacationApprovalCtrl]).controller('ErrorCtrl', function ($scope, $translate) {
     $scope.model.Errors["SummaryMessage"] = function () {
         if (!this.HasErrors)
             return "";
@@ -94,13 +102,13 @@ angular.module('myApp.controllers', []).controller('VacationApprovalCtrl', ['$sc
             case 0:
                 return "";
             case 1:
-                return Validation.StringFce.format("{ErrorCount} chyba.", this);
+                return Validation.StringFce.format("{ErrorCount} error.", this);
             case 2:
             case 3:
             case 4:
-                return Validation.StringFce.format("{ErrorCount} chyby.", this);
+                return Validation.StringFce.format("{ErrorCount} errors.", this);
             default:
-                return Validation.StringFce.format("{ErrorCount} chyb.", this);
+                return Validation.StringFce.format("{ErrorCount} errors.", this);
         }
     };
 }).controller('DocsCtrl', function ($scope, $http, $location, Doc) {

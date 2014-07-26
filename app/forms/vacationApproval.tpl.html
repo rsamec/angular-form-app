@@ -1,9 +1,10 @@
 <form class="form-horizontal">
     <div class="form-group">
-        <label class="col-xs-2 control-label">Name:</label>
+        <label class="col-xs-2 control-label">{{'Name' | translate}}:</label>
 
         <div class="col-xs-4 col-sm-3 col-md-2">
-            <input type="text" class="form-control" placeholder="{{'FirstName' | translate}}" ng-model="model.Data.Employee.FirstName"
+            <input type="text" class="form-control" placeholder="{{'FirstName' | translate}}"
+                   ng-model="model.Data.Employee.FirstName"
                    rule="model.EmployeeValidator">
 
             <div class="validation-error">
@@ -11,7 +12,8 @@
             </div>
         </div>
         <div class="col-xs-6 col-sm-4 col-md-3">
-            <input type="text" class="form-control" placeholder="{{'LastName' | translate}}" ng-model="model.Data.Employee.LastName"
+            <input type="text" class="form-control" placeholder="{{'LastName' | translate}}"
+                   ng-model="model.Data.Employee.LastName"
                    rule="model.EmployeeValidator">
 
             <div class="validation-error">
@@ -26,33 +28,53 @@
 
         <div class="col-xs-4 col-sm-3 col-md-2">
             <p class="input-group">
-                <input type="text" class="form-control" placeholder="{{'From' | translate}}" datepicker-popup="dd.MM.yyyy" rule="model.DurationValidator" ng-model="model.Data.Duration.From" is-open="$parent.openedFrom" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                <input type="text" class="form-control" placeholder="{{'From' | translate}}"
+                       datepicker-popup="dd.MM.yyyy" rule="model.DurationValidator" ng-model="model.Data.Duration.From"
+                       is-open="$parent.openedFrom" min-date="minDate" max-date="'2015-06-22'"
+                       datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close"/>
               <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="openFrom($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                <button type="button" class="btn btn-default" ng-click="openFrom($event)"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
               </span>
             </p>
             <!--<input type="text" class="form-control" placeholder="From" date-mask ng-model="model.Data.Duration.From"-->
-                   <!--rule="model.DurationValidator">-->
+            <!--rule="model.DurationValidator">-->
 
-            <div class="validation-error">
-                {{model.DurationValidator.Rules["From"].ErrorMessage}}
-            </div>
+            <!--<div class="validation-error">-->
+            <!--{{model.DurationValidator.Rules["From"].ErrorMessage}}-->
+            <!--</div>-->
+            <div error="model.DurationValidator.Rules['From'].ValidationFailures['required']"></div>
+            <div error="model.DurationValidator.Rules['From'].ValidationFailures['dateCompareExt']"></div>
+
         </div>
         <div class="col-xs-4 col-sm-3 col-md-2">
             <!--<input type="text" class="form-control" placeholder="To" date-mask ng-model="model.Data.Duration.To"-->
-                   <!--rule="model.DurationValidator">-->
+            <!--rule="model.DurationValidator">-->
 
             <p class="input-group">
-                <input type="text" class="form-control" placeholder="{{'To' | translate}}" datepicker-popup="dd.MM.yyyy" rule="model.DurationValidator"  ng-model="model.Data.Duration.To" is-open="$parent.openedTo" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                <input type="text" class="form-control" placeholder="{{'To' | translate}}" datepicker-popup="dd.MM.yyyy"
+                       rule="model.DurationValidator" ng-model="model.Data.Duration.To" is-open="$parent.openedTo"
+                       min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions"
+                       date-disabled="disabled(date, mode)" close-text="Close"/>
               <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="openTo($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                <button type="button" class="btn btn-default" ng-click="openTo($event)"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
               </span>
             </p>
 
-            <div class="validation-error">
-                {{model.DurationValidator.Rules["To"].ErrorMessage}}
-                {{model.DurationValidator.Validators["VacationDuration"].ErrorMessage}}
-            </div>
+            <!--<div class="validation-error">-->
+            <!--{{model.DurationValidator.Rules["To"].ErrorMessage}}-->
+            <!--</div>-->
+            <div error="model.DurationValidator.Rules['To'].ValidationFailures['required']"></div>
+            <div error="model.DurationValidator.Rules['To'].ValidationFailures['dateCompareExt']"></div>
+        </div>
+        <div class="col-xs-2" style="margin-top: 5px">
+            <b>{{days()}} {{'DAYS_TEXT'| translate}}</b>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+            <div error="model.DurationValidator.Validators['VacationDuration'].Error"></div>
         </div>
     </div>
 
@@ -72,7 +94,8 @@
             <label class="col-xs-2 control-label">{{'Deputy1' | translate}}:</label>
 
             <div class="col-xs-4 col-sm-3 col-md-2">
-                <input type="text" class="form-control" placeholder="{{'FirstName' | translate}}" ng-model="model.Data.Deputy1.FirstName"
+                <input type="text" class="form-control" placeholder="{{'FirstName' | translate}}"
+                       ng-model="model.Data.Deputy1.FirstName"
                        rule="model.Deputy1Validator">
 
                 <div class="validation-error">
@@ -80,7 +103,8 @@
                 </div>
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3">
-                <input type="text" class="form-control" placeholder="{{'LastName' | translate}}" ng-model="model.Data.Deputy1.LastName"
+                <input type="text" class="form-control" placeholder="{{'LastName' | translate}}"
+                       ng-model="model.Data.Deputy1.LastName"
                        rule="model.Deputy1Validator">
 
                 <div class="validation-error">

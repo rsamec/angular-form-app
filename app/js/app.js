@@ -34,7 +34,17 @@ app.config(['$routeProvider','$httpProvider','$translateProvider', function($rou
         To: 'To',
         Deputy1:'Deputy',
         Deputy2:'Next deputy',
-        DiffNames:'Duplicate names'
+        DiffNames:'Duplicate names',
+        BeforeDate: JSON.stringify({
+            Format:'MM/DD/YYYY',
+            Msg:"Date from '{From}' must preceed date to '{To}'."
+        }),
+        dateCompareExt: JSON.stringify({
+            Format:'MM/DD/YYYY',
+            Msg:"Date must be between '{From}' - '{To}'."
+        }),
+        DAYS_TEXT:'day(s)'
+
     })
     .translations('cz', {
             HEADLINE: 'Hey, das ist meine großartige App!',
@@ -48,11 +58,21 @@ app.config(['$routeProvider','$httpProvider','$translateProvider', function($rou
             To: 'Do',
             Deputy1:'Zástupce',
             Deputy2:'Další zástupce',
-            DiffNames:'Duplicitní jména'
+            DiffNames:'Duplicitní jména',
+            BeforeDate:JSON.stringify({
+                Format:'DD/MM/YYYY',
+                Msg:"Datum '{From}' musí být před datem '{To}."
+            }),
+            dateCompareExt: JSON.stringify({
+                Format:'MM/DD/YYYY',
+                Msg:"Datum musí být mezi ('{From}' - '{To}')."
+            }),
+            DAYS_TEXT:'den(dnů)'
+
 
         })
 
-    $translateProvider.preferredLanguage('en');
+    $translateProvider.preferredLanguage('cz');
 
   $routeProvider.when('/edit/:id', {templateUrl: 'partials/form.tpl.html', controller: 'VacationApprovalCtrl',
       resolve: {

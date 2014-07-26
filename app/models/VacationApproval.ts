@@ -4,6 +4,7 @@
 ///<reference path='../../typings/formValidation/form.d.ts'/>
 ///<reference path='../../typings/formValidation/validators.d.ts'/>
 
+///<reference path='MyCustomValidator.ts'/>
 
 //import dateCompare = require("DateCompareValidator");
 
@@ -71,9 +72,10 @@ module Models {
                 return this.Email == undefined || !this.Email.Checked
             }.bind(this.Data.Employee);
 
-            this.Deputy1Validator.SetOptional(function () {
-                return this.Deputy1 == undefined || !this.Deputy1.Checked
-            }.bind(this.Data));
+//            this.Deputy1Validator.SetOptional(function () {
+//                return this.Deputy1 == undefined || !this.Deputy1.Checked
+//            }.bind(this.Data));
+
 
             this.Deputy2Validator.SetOptional(function () {
                 return this.Deputy2 == undefined || !this.Deputy2.Checked
@@ -130,22 +132,40 @@ module Models {
 
             var required = new Validation.RequiredValidator();
 
-            var greaterThanToday = new DateCompareValidator();
-            greaterThanToday.CompareOperator = 4;
+            var greaterThanToday = new MyCustomValidator();
+            greaterThanToday.FromOperator = Validation.CompareOperator.GreaterThanEqual;
+            greaterThanToday.From = new Date();
             greaterThanToday.IgnoreTime = true;
+            greaterThanToday.ToOperator = Validation.CompareOperator.LessThanEqual;
+            greaterThanToday.To = moment(new Date()).add({year:1}).toDate();
 
-            var lowerThanOneYearToday = new DateCompareValidator();
-            lowerThanOneYearToday.CompareOperator = 1;
-            lowerThanOneYearToday.IgnoreTime = true;
-            lowerThanOneYearToday.CompareTo = moment(new Date()).add({year:1}).toDate();
+            var customErrorMessage = function (config, args) {
+                var msg = config["Msg"]
+
+                var format = config["Format"];
+                if (format != undefined) {
+                    _.extend(args, {
+                        FormatedFrom: moment(args.From).format(format),
+                        FormatedTo: moment(args.To).format(format),
+                        FormatedAttemptedValue: moment(args.AttemptedValue).format(format)
+                    });
+                }
+
+                msg = msg.replace('From', 'FormatedFrom');
+                msg = msg.replace('To', 'FormatedTo');
+                msg = msg.replace('AttemptedValue', 'FormatedAttemptedValue');
+                return Validation.StringFce.format(msg, args);
+            };
+
 
             validator.RuleFor("From", required);
             validator.RuleFor("To", required);
 
             validator.RuleFor("From", greaterThanToday);
             validator.RuleFor("To", greaterThanToday);
-            //validator.RuleFor("From", lowerThanOneYearToday);
-            //validator.RuleFor("To", lowerThanOneYearToday);
+
+            //
+
 
             //create named shared validaton
             var isBeforeFce = function (args:any) {
@@ -154,11 +174,11 @@ module Models {
 
                 //no dates - > nothing to validate
                 if (!_.isDate(this.From) || !_.isDate(this.To)) return;
-
-                    if (moment(this.From).isAfter(this.To)) {
+                    var to = moment(this.To).clone();
+                    if (moment(this.From).startOf('day').isAfter(moment(to).add({days:-1}).startOf('day'))) {
                     args.HasError = true;
-                    args.ErrorMessage = Validation.StringFce.format("Date from '{From}' must be before date to '{To'}.",this)
-                    args.TranslateArgs = {TranslateId:'BeforeDate',MessageArgs:this};
+                    args.ErrorMessage = Validation.StringFce.format("Date from '{From}' must be before date to '{To}'.",this);
+                    args.TranslateArgs = {TranslateId:'BeforeDate',MessageArgs:this, CustomMessage: customErrorMessage};
                     return;
                 }
             }
