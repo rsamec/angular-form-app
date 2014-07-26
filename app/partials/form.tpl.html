@@ -1,0 +1,24 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div ng-include src="'partials/formHeader.tpl.html'"></div>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row well">
+        <div class="col-md-10">
+            <div ng-include src="'forms/vacationApproval.tpl.html'"></div>
+        </div>
+        <div class="col-md-2" ng-controller="ErrorCtrl">
+            <div ng-include src="'partials/errors.tpl.html'"></div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">{{updated | successSave:'dd.MM.yyyy HH:mm:ss'}}</div>
+        </div>
+    </div>
+</nav>
+

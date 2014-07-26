@@ -28,3 +28,13 @@
   content: "";
   padding: 0;
 }
+body { padding-top: 70px; }
+body { padding-bottom: 70px; }
+
+.selected {
+    background: yellow;
+}
+.validation-error{
+    color: darkred;
+}
+

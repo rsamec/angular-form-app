@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div ng-include src="'partials/header.tpl.html'"></div>
+</nav>
+
+<ul class="list-inline">
+    <li class="list-group" ng-repeat="doc in docs" >
+
+        <a ng-dblclick="edit(doc.$id())" ng-click="toggle(doc.$id())" class="list-group-item" ng-class="{'selected':selection.indexOf(doc.$id()) != -1}">
+            <h4 class="list-group-item-heading">{{doc.data.Employee.FirstName + " " + doc.data.Employee.LastName}}</h4>
+            <p class="list-group-item-text">{{doc.data.Duration.From | date:'dd.MM.yyyy'}} - {{doc.data.Duration.To | date:'dd.MM.yyyy'}}</p>
+        </a>
+
+    </li>
+</ul>
+
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <div class="container">
+       ...
+    </div>
+</nav>

@@ -1,0 +1,20 @@
+<div ng-show="model.Errors.HasErrorsDirty" class="form-summary-error">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="validation-error" style="font-weight: bold">{{model.Errors.SummaryMessage()}}</span>
+        </div>
+        <div class="panel-body">
+            <ul style="list-style-type:none;padding-left:0px;">
+                <li ng-show="page.HasErrorsDirty" ng-repeat="page in model.Errors.Children">
+                    <span class="validation-error" style="cursor:pointer;font-weight: bold">{{page.Name | translate}}</span>
+                    <ul style="list-style-type:none;padding-left:8px;">
+                        <li ng-show="item.HasErrorsDirty" ng-repeat="item in page.Children">
+                            <span style="cursor:pointer;">{{item.Name | translate }}</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,139 @@
+<form class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-2 control-label">Name:</label>
+
+        <div class="col-xs-4 col-sm-3 col-md-2">
+            <input type="text" class="form-control" placeholder="{{'FirstName' | translate}}" ng-model="model.Data.Employee.FirstName"
+                   rule="model.EmployeeValidator">
+
+            <div class="validation-error">
+                {{model.EmployeeValidator.Rules["FirstName"].ErrorMessage}}
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+            <input type="text" class="form-control" placeholder="{{'LastName' | translate}}" ng-model="model.Data.Employee.LastName"
+                   rule="model.EmployeeValidator">
+
+            <div class="validation-error">
+                {{model.EmployeeValidator.Rules["LastName"].ErrorMessage}}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-xs-2 control-label">{{'Duration' | translate}}:</label>
+
+        <div class="col-xs-4 col-sm-3 col-md-2">
+            <p class="input-group">
+                <input type="text" class="form-control" placeholder="{{'From' | translate}}" datepicker-popup="dd.MM.yyyy" rule="model.DurationValidator" ng-model="model.Data.Duration.From" is-open="$parent.openedFrom" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openFrom($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+            <!--<input type="text" class="form-control" placeholder="From" date-mask ng-model="model.Data.Duration.From"-->
+                   <!--rule="model.DurationValidator">-->
+
+            <div class="validation-error">
+                {{model.DurationValidator.Rules["From"].ErrorMessage}}
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-3 col-md-2">
+            <!--<input type="text" class="form-control" placeholder="To" date-mask ng-model="model.Data.Duration.To"-->
+                   <!--rule="model.DurationValidator">-->
+
+            <p class="input-group">
+                <input type="text" class="form-control" placeholder="{{'To' | translate}}" datepicker-popup="dd.MM.yyyy" rule="model.DurationValidator"  ng-model="model.Data.Duration.To" is-open="$parent.openedTo" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openTo($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+
+            <div class="validation-error">
+                {{model.DurationValidator.Rules["To"].ErrorMessage}}
+                {{model.DurationValidator.Validators["VacationDuration"].ErrorMessage}}
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.Data.Deputy1.Checked">{{'Deputy1' | translate}}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="model.Data.Deputy1.Checked">
+
+        <div class="form-group">
+            <label class="col-xs-2 control-label">{{'Deputy1' | translate}}:</label>
+
+            <div class="col-xs-4 col-sm-3 col-md-2">
+                <input type="text" class="form-control" placeholder="{{'FirstName' | translate}}" ng-model="model.Data.Deputy1.FirstName"
+                       rule="model.Deputy1Validator">
+
+                <div class="validation-error">
+                    {{model.Deputy1Validator.Rules["FirstName"].ErrorMessage}}
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3">
+                <input type="text" class="form-control" placeholder="{{'LastName' | translate}}" ng-model="model.Data.Deputy1.LastName"
+                       rule="model.Deputy1Validator">
+
+                <div class="validation-error">
+                    {{model.EmployeeValidator.Rules["LastName"].ErrorMessage}}
+                </div>
+            </div>
+        </div>
+        <field rule="model.Deputy1Validator" ng-model="model.Data.Deputy1.Email" label="Email"></field>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.Data.Deputy2.Checked">{{'Deputy2' | translate}}
+                </label>
+            </div>
+        </div>
+    </div>
+
+
+    <div ng-show="model.Data.Deputy2.Checked">
+        <div class="row">
+            <div class="col-xs-12 validation-error">
+                {{model.DeputyDiffNamesValidator.ErrorMessage}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">{{'Deputy2' | translate}}:</label>
+
+            <div class="col-xs-4 col-sm-3 col-md-2">
+                <input type="text" class="form-control" placeholder="{{'FirstName' | translate}}"
+                       ng-model="model.Data.Deputy2.FirstName"
+                       rule="model.Deputy2Validator">
+
+                <div class="validation-error">
+                    {{model.Deputy2Validator.Rules["FirstName"].ErrorMessage}}
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3">
+                <input type="text" class="form-control" placeholder="{{'LastName' | translate}}"
+                       ng-model="model.Data.Deputy2.LastName"
+                       rule="model.Deputy2Validator">
+
+                <div class="validation-error">
+                    {{model.Deputy2Validator.Rules["LastName"].ErrorMessage}}
+                </div>
+            </div>
+        </div>
+        <field rule="model.Deputy2Validator" ng-model="model.Data.Deputy2.Email"
+               label="Email:"></field>
+
+    </div>
+
+    <!--<pre>{{model.Data   | json}}</pre>-->
+</form>
