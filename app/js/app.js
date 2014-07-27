@@ -9,7 +9,8 @@ var app = angular.module('myApp', [
   'myApp.controllers',
   'mongolabResourceHttp',
   'ui.bootstrap',
-  'pascalprecht.translate'
+  'pascalprecht.translate',
+  'myApp.vacationApproval'
 ]);
 
 app.constant('MONGOLAB_CONFIG',
@@ -43,7 +44,7 @@ app.config(['$routeProvider','$httpProvider','$translateProvider', function($rou
             Format:'MM/DD/YYYY',
             Msg:"Date must be between '{From}' - '{To}'."
         }),
-        DAYS_TEXT:'day(s)'
+        DAYS_TEXT:'day(s)',
 
     })
     .translations('cz', {
