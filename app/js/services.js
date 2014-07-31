@@ -13,10 +13,10 @@ services.service('param',function($q, $timeout){
     Q = $q;
     return {
 
-        getOptions:function () {
+        isAcceptable:function (data) {
             var deferral = $q.defer();
             $timeout(function() {
-                deferral.resolve([{ "value": 1, "text": "aranžér" }, { "value": 2, "text": "stavař" }, { "value": 3, "text": "programátor" }, { "value": 3, "text": "nezaměstnaný" }]);
+                deferral.resolve(true);
             }, 1000);
             return deferral.promise;
         }

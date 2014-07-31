@@ -130,23 +130,66 @@ uiControls.directive('error', function ($translate) {
                         scope.errMsg = Validation.StringFce.format(errMsg, scope.error.TranslateArgs.MessageArgs);
                     }},
                     function (reason) {
-                        alert(reason);
+                        //fallback to default error message
+                        scope.errMsg = scope.error.ErrorMessage;
                     }
                 )
-
-
-
-
             }
 
             setErrMsg();
-            scope.$watch('error.HasError', function (newValue, oldValue, scope)
+            scope.$watch('error.ErrorMessage', function (newValue, oldValue, scope)
             {
                 setErrMsg();
             }, true);
 
 
        }
+    };
+});
+
+uiControls.directive('valResult', function ($translate) {
+    return {
+        restrict: 'A',
+        scope:{
+            valResult:'='
+        },
+        //template:'<div class="validation-error"></div>',
+        link: function (scope, element, attrs) {
+            element.addClass("validation-error");
+
+            var translateMsg = function(arg,defaultErrorMsg) {
+                $translate(arg.TranslateId).then(function (errMsg) {
+                        if (arg.CustomMessage != undefined) {
+                            element.append(arg.CustomMessage(JSON.parse(errMsg), arg.MessageArgs));
+                        } else {
+                            element.append(Validation.StringFce.format(errMsg, arg.MessageArgs))
+                        }
+                    },
+                    function (reason) {
+                        //fallback to default error message
+                        element.append(defaultErrorMsg);
+                    }
+                );
+            };
+            var translateMsgs = function(){
+                _.each(scope.valResult.ValidationFailures,function(error,key){
+                   if (!error.HasError) return;
+                   var arg = error.TranslateArgs;
+                   if (arg == undefined) {
+                       element.append(error.ErrorMessage);
+                       return;
+                   }
+                   translateMsg(arg,error.ErrorMessage);
+                })
+            };
+
+            translateMsgs();
+
+            scope.$watch("valResult.ErrorMessage",function(){
+                element.html('');
+                translateMsgs();
+            },true)
+        }
     };
 });
 

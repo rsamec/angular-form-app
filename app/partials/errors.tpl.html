@@ -1,7 +1,7 @@
 <div ng-show="model.Errors.HasErrorsDirty" class="form-summary-error">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <span class="validation-error" style="font-weight: bold">{{model.Errors.SummaryMessage()}}</span>
+            <span class="validation-error" style="font-weight: bold">{{model.Errors.ErrorCount}} {{'Errors'| translate }}</span>
         </div>
         <div class="panel-body">
             <ul style="list-style-type:none;padding-left:0px;">

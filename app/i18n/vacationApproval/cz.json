@@ -1,0 +1,34 @@
+{
+    "Data": "Dovolená",
+    "Checked":"Zvoleno",
+    "Employee": "Zaměstnanec",
+    "FirstName": "Jméno",
+	"LastName": "Příjmení",
+    "Email":"Email",
+	"Duration": "Doba",
+    "ExcludedDays": "Přerušení dovolené (svátky, atd.)",
+	"From": "Od",
+	"To": "Do",
+	"Deputy1": "Zástupce",
+	"Deputy2": "Další zástupce",
+
+    "DeputyConflict": "Zástupce - konflikty",
+	"VacationDuration": "Doba dovolené",
+    "BeforeDate": {
+        "Format": "DD.MM.YYYY",
+        "Msg": "Datum '{From}' musí být před datem '{To}'."
+    },
+    "RangeDuration": "Doba dovolené musí být mezi {MinDays} a {MaxDays} dny.",
+    "ExcludedDaysMsg":"Následující dny nejsou v rozsahu dovolené: '{ExcludedDates}'.",
+
+	"isWeekday": "Datum nesmí být sobota nebo neděle.",
+    "dateCompareExt": {
+        "Format": "DD.MM.YYYY",
+        "Msg": "Datum musí být mezi ('{From}' - '{To}')."
+    },
+
+    "NoErrors": "Neexistují žádné chyby.",
+    "Errors": "Chyby",
+    "DAYS_TEXT": "den(dnů)"
+
+}

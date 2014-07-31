@@ -1,0 +1,33 @@
+{
+	"Data": "Urlaub",
+	"Checked": "Gewählt",
+	"Employee": "Arbeitnehmer",
+	"FirstName": "Vorname",
+	"LastName": "Nachname",
+	"Email": "Email",
+	"Duration": "Dauer",
+	"ExcludedDays": "Abbrüche (Feiertage, usw.)",
+	"From": "Von",
+	"To": "Bis",
+	"Deputy1": "Vertreter",
+	"Deputy2": "Weitere vertreter",
+	"DeputyConflict": "Vertreter konflikt",
+	"VacationDuration": "Urlaubdauer",
+	"BeforeDate": {
+		"Format": "DD.MM.YYYY",
+		"Msg": "Das datum '{From}' must vor dem datum '{To}' sein."
+	},
+    "RangeDuration": "Urlaubdauer müssen zwischen {MinDays} und {MaxDays} tage sein.",
+    "ExcludedDaysMsg":"Folgede tage sind nicht im Rahmen des Urlaub:'{ExcludedDates}'.",
+
+	"isWeekday": "Geben Sie bitte eines Datum anders von Samstag or Sonntag.",
+	"dateCompareExt": {
+		"Format": "DD.MM.YYYY",
+		"Msg": "Geben Sie bitte eines Datum zwischen ('{From}' - '{To}')."
+	},
+	"NoErrors": "Es gibt keine Fehler.",
+	"DAYS_TEXT": "Tag(e))",
+	"Errors": "Fehlers",
+	"required": "required",
+	"maxlength": "maxlength"
+}

@@ -1,5 +1,4 @@
 ///<reference path='../../typings/underscore/underscore.d.ts'/>
-
 var Utils = (function () {
     function Utils() {
     }

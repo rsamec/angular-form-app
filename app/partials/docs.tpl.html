@@ -3,11 +3,15 @@
 </nav>
 
 <ul class="list-inline">
-    <li class="list-group" ng-repeat="doc in docs" >
+    <li class="list-group" ng-repeat="doc in docs | vacationFilter:search.Text">
 
-        <a ng-dblclick="edit(doc.$id())" ng-click="toggle(doc.$id())" class="list-group-item" ng-class="{'selected':selection.indexOf(doc.$id()) != -1}">
-            <h4 class="list-group-item-heading">{{doc.data.Employee.FirstName + " " + doc.data.Employee.LastName}}</h4>
-            <p class="list-group-item-text">{{doc.data.Duration.From | date:'dd.MM.yyyy'}} - {{doc.data.Duration.To | date:'dd.MM.yyyy'}}</p>
+        <a ng-dblclick="edit(doc.$id())" ng-click="toggle(doc.$id())" class="list-group-item"
+           ng-class="{'selected':selection.indexOf(doc.$id()) != -1}">
+            <h4 class="list-group-item-heading">{{doc.data.Employee | person}}</h4>
+
+            <p class="list-group-item-text">{{doc.data.Duration | duration:'dd.MM.yyyy'}}</p>
+
+            <p class="list-group-item-text">{{'Deputy' | translate}}:<b>{{doc.data.Deputy1 | person}}</b></p>
         </a>
 
     </li>
@@ -15,6 +19,6 @@
 
 <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
     <div class="container">
-       ...
+        ...
     </div>
 </nav>

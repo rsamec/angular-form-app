@@ -31,64 +31,77 @@
                 <input type="text" class="form-control" placeholder="{{'From' | translate}}"
                        datepicker-popup="dd.MM.yyyy" rule="model.DurationValidator" ng-model="model.Data.Duration.From"
                        is-open="$parent.openedFrom" min-date="minDate" max-date="'2015-06-22'"
-                       datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close"/>
+                       datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" ng-change="rangeChange()"/>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="openFrom($event)"><i
                         class="glyphicon glyphicon-calendar"></i></button>
               </span>
             </p>
-            <!--<input type="text" class="form-control" placeholder="From" date-mask ng-model="model.Data.Duration.From"-->
-            <!--rule="model.DurationValidator">-->
 
-            <!--<div class="validation-error">-->
-            <!--{{model.DurationValidator.Rules["From"].ErrorMessage}}-->
-            <!--</div>-->
-            <div error="model.DurationValidator.Rules['From'].ValidationFailures['required']"></div>
-            <div error="model.DurationValidator.Rules['From'].ValidationFailures['dateCompareExt']"></div>
+            <div val-result="model.DurationValidator.Rules['From']"></div>
 
         </div>
         <div class="col-xs-4 col-sm-3 col-md-2">
-            <!--<input type="text" class="form-control" placeholder="To" date-mask ng-model="model.Data.Duration.To"-->
-            <!--rule="model.DurationValidator">-->
 
             <p class="input-group">
                 <input type="text" class="form-control" placeholder="{{'To' | translate}}" datepicker-popup="dd.MM.yyyy"
                        rule="model.DurationValidator" ng-model="model.Data.Duration.To" is-open="$parent.openedTo"
                        min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions"
-                       date-disabled="disabled(date, mode)" close-text="Close"/>
+                       date-disabled="disabled(date, mode)" close-text="Close" ng-change="rangeChange()"/>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="openTo($event)"><i
                         class="glyphicon glyphicon-calendar"></i></button>
               </span>
             </p>
 
-            <!--<div class="validation-error">-->
-            <!--{{model.DurationValidator.Rules["To"].ErrorMessage}}-->
-            <!--</div>-->
-            <div error="model.DurationValidator.Rules['To'].ValidationFailures['required']"></div>
-            <div error="model.DurationValidator.Rules['To'].ValidationFailures['dateCompareExt']"></div>
+
+            <div val-result="model.DurationValidator.Rules['To']"></div>
+
         </div>
         <div class="col-xs-2" style="margin-top: 5px">
             <b>{{days()}} {{'DAYS_TEXT'| translate}}</b>
         </div>
     </div>
-    <div class="form-group">
+
+    <!--<div class="form-group">-->
         <div class="col-xs-offset-2 col-xs-10">
             <div error="model.DurationValidator.Validators['VacationDuration'].Error"></div>
         </div>
-    </div>
+    <!--</div>-->
 
     <div class="form-group">
         <div class="col-xs-offset-2 col-xs-10">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="model.Data.Deputy1.Checked">{{'Deputy1' | translate}}
+                    <input type="checkbox" ng-model="model.Data.Duration.ExcludedDaysChecked">{{'ExcludedDays' | translate}}
                 </label>
             </div>
         </div>
     </div>
 
-    <div ng-show="model.Data.Deputy1.Checked">
+    <div ng-show="model.Data.Duration.ExcludedDaysChecked">
+        <div class="col-xs-offset-2 col-xs-10">
+            <div ng-repeat="day in vacationDays">
+               <span ng-click="toggleExcludedDays(day)" ng-class="{'selected':excludedDaysContains(day)}"> {{day | date:'fullDate'}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group"></div>
+    <div class="form-group"></div>
+
+    <!--<div class="form-group">-->
+        <!--<div class="col-xs-offset-2 col-xs-10">-->
+            <!--<div class="checkbox">-->
+                <!--<label>-->
+                    <!--<input type="checkbox" ng-model="model.Data.Deputy1.Checked">{{'Deputy1' | translate}}-->
+                <!--</label>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+
+    <!--<div ng-show="model.Data.Deputy1.Checked">-->
 
         <div class="form-group">
             <label class="col-xs-2 control-label">{{'Deputy1' | translate}}:</label>
@@ -113,7 +126,8 @@
             </div>
         </div>
         <field rule="model.Deputy1Validator" ng-model="model.Data.Deputy1.Email" label="Email"></field>
-    </div>
+    <!--</div>-->
+
 
     <div class="form-group">
         <div class="col-xs-offset-2 col-xs-10">

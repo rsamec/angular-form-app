@@ -1,0 +1,28 @@
+{
+    "Documents": "Dokumenty",
+    "Dashboard": "Nástěnka dovolenek",
+
+    "DocOperation": "Operace",
+    "DocOperationPrint": "Tisk",
+    "DocOperationCopy": "Kopírovat",
+    "DocOperationEdit": "Upravit",
+    "DocOperationNew": "Nový",
+    "DocOperationApprove": "Schválit",
+    "DocOperationCancel":"Stornovat",
+
+    "DocOperationButtonSave":"Uložit",
+    "DocOperationButtonValidate":"Zkontrolovat",
+    "DocOperationButtonReset":"Vynulovat",
+    "DocOperationButtonClose":"Zavřít",
+
+    "Deputy": "Zástupce:",
+    "VacationRequest": "Dovolenka",
+
+    "VacationApprovalHistory": "Historie dovolených",
+    "VacationApprovalFuture": "Plánované dovolené",
+    "VacationApprovalToday": "Dnešní dovolené",
+
+    "Search": "Potvrdit",
+    "SearchText": "Hledat"
+
+}

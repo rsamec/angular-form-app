@@ -1,0 +1,27 @@
+{
+    "Documents": "Documents",
+    "Dashboard": "Vacation dashboard",
+
+    "DocOperation": "Operation",
+    "DocOperationPrint": "Print",
+    "DocOperationEdit": "Edit",
+    "DocOperationCopy": "Copy",
+    "DocOperationNew": "New",
+    "DocOperationApprove": "Approve",
+    "DocOperationCancel":"Cancel",
+
+    "DocOperationButtonSave":"Save",
+    "DocOperationButtonValidate":"Validate",
+    "DocOperationButtonReset":"Reset",
+    "DocOperationButtonClose":"Close",
+
+    "Deputy": "Deputed by:",
+    "VacationRequest": "Vacation request",
+
+    "VacationApprovalHistory": "History vacations",
+    "VacationApprovalFuture": "Future vacations",
+    "VacationApprovalToday": "Today vacations",
+
+    "Search": "Submit",
+    "SearchText": "Search"
+}

@@ -15,65 +15,73 @@ var app = angular.module('myApp', [
 
 app.constant('MONGOLAB_CONFIG',
     {API_KEY:'SX4PfDQhzWoek3EnS6FdYo-fWaxO7cQI', DB_NAME:'datagraph'});
-app.config(['$routeProvider','$httpProvider','$translateProvider', function($routeProvider,$httpProvider,$translateProvider) {
+app.config(['$provide','$routeProvider','$httpProvider','$translateProvider','$translatePartialLoaderProvider',
+    function($provide,$routeProvider,$httpProvider,$translateProvider,$translatePartialLoaderProvider) {
 
-    $httpProvider.defaults.transformResponse.push(function (responseData) {
-        Utils.transformISOStringToDates(responseData);
-        return responseData;
+    // Intercept http calls.
+    $provide.factory('MyHttpInterceptor', function () {
+        return {
+            // On request success
+            request: function (config) {
+                // console.log(config); // Contains the data about the request before it is sent.
+                var data = angular.copy(config.data);
+                Utils.transformDatesToISOString(data);
+                config.data = data;
+                return config;
+
+            },
+
+            // On request failure
+            requestError: function (rejection) {
+                // console.log(rejection); // Contains the data about the error on the request.
+
+                // Return the promise rejection.
+                return rejection;
+            },
+
+            // On response success
+            response: function (response) {
+                // console.log(response); // Contains the data from the response.
+
+                // Return the response or promise.
+                Utils.transformISOStringToDates(response.data);
+                return response;
+            },
+
+            // On response failture
+            responseError: function (rejection) {
+                // console.log(rejection); // Contains the data about the error.
+
+                // Return the promise rejection.
+                return rejection;
+            }
+        };
     });
 
+    // Add the interceptor to the $httpProvider.
+    $httpProvider.interceptors.push('MyHttpInterceptor');
+//    $httpProvider.defaults.transformResponse.push(function (responseData) {
+//        Utils.transformISOStringToDates(responseData);
+//        return responseData;
+//    });
+//    $httpProvider.defaults.transformRequest.push(function (reqeuestData) {
+//        Utils.transformDatesToISOString(reqeuestData);
+//        return reqeuestData;
+//    });
 
-    $translateProvider.translations('en', {
-        HEADLINE: 'Hello there, This is my awesome app!',
-        INTRO_TEXT: 'And it has i18n support!',
-        Employee:'Employee',
-        Name:'Name',
-        FirstName: 'First name',
-        LastName: 'Last name',
-        Duration:'Duration',
-        From: 'From',
-        To: 'To',
-        Deputy1:'Deputy',
-        Deputy2:'Next deputy',
-        DiffNames:'Duplicate names',
-        BeforeDate: JSON.stringify({
-            Format:'MM/DD/YYYY',
-            Msg:"Date from '{From}' must preceed date to '{To}'."
-        }),
-        dateCompareExt: JSON.stringify({
-            Format:'MM/DD/YYYY',
-            Msg:"Date must be between '{From}' - '{To}'."
-        }),
-        DAYS_TEXT:'day(s)',
+    $translatePartialLoaderProvider.addPart('docs');
+    $translateProvider.useLoader('$translatePartialLoader', {
+        urlTemplate: '/app/i18n/{part}/{lang}.json'
+    });
 
-    })
-    .translations('cz', {
-            HEADLINE: 'Hey, das ist meine großartige App!',
-            INTRO_TEXT: 'Und sie untersützt mehrere Sprachen!',
-            Employee: 'Zaměstnanec',
-            Name:'Jméno a příjmení',
-            FirstName: 'Jméno',
-            LastName: 'Příjmení',
-            Duration: 'Doba',
-            From: 'Od',
-            To: 'Do',
-            Deputy1:'Zástupce',
-            Deputy2:'Další zástupce',
-            DiffNames:'Duplicitní jména',
-            BeforeDate:JSON.stringify({
-                Format:'DD/MM/YYYY',
-                Msg:"Datum '{From}' musí být před datem '{To}."
-            }),
-            dateCompareExt: JSON.stringify({
-                Format:'MM/DD/YYYY',
-                Msg:"Datum musí být mezi ('{From}' - '{To}')."
-            }),
-            DAYS_TEXT:'den(dnů)'
-
-
-        })
+//    $translateProvider.useStaticFilesLoader({
+//        prefix: 'bower_components/node-form-models/dist/vacationApproval/i18n/',
+//        suffix: '.json'
+//    });
 
     $translateProvider.preferredLanguage('cz');
+
+    _.extend(Validation.MessageLocalization.defaultMessages,Localization.ValidationMessages);
 
   $routeProvider.when('/edit/:id', {templateUrl: 'partials/form.tpl.html', controller: 'VacationApprovalCtrl',
       resolve: {
@@ -94,6 +102,7 @@ app.config(['$routeProvider','$httpProvider','$translateProvider', function($rou
 
   });
   $routeProvider.when('/docs', {templateUrl: 'partials/docs.tpl.html', controller: 'DocsCtrl'});
+  $routeProvider.when('/dashboard', {templateUrl: 'partials/dashboard.tpl.html', controller: 'DocsCtrl'});
   $routeProvider.otherwise({redirectTo: '/docs'});
 }]);
 

@@ -1,0 +1,28 @@
+{
+    "Documents": "Dokumente",
+    "Dashboard": "Urlaubswandzeitung",
+
+    "DocOperation": "Operation",
+    "DocOperationPrint": "Druck",
+    "DocOperationCopy": "Kopieren",
+    "DocOperationEdit": "Überarbeiten",
+
+    "DocOperationNew": "Neues",
+    "DocOperationApprove": "Zustimmen",
+    "DocOperationCancel":"Stornieren",
+
+    "DocOperationButtonSave":"Speichern",
+    "DocOperationButtonValidate":"Validieren",
+    "DocOperationButtonReset":"Resetieren",
+    "DocOperationButtonClose":"Zumachen",
+
+    "Deputy": "Verterter:",
+    "VacationRequest": "Urlaub anforderung",
+
+    "VacationApprovalHistory": "History urlaubs",
+    "VacationApprovalFuture": "Planete urlaube",
+    "VacationApprovalToday": "Tagliceh urlaube",
+
+    "Search": "Suchen",
+    "SearchText": "Suchen"
+}

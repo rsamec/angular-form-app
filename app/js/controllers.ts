@@ -5,7 +5,7 @@
 
 /* Controllers */
 interface IDocScope extends ng.IScope {
-    validate(): void;
+    validate(): Q.Promise<any>;
     reset(): void;
     showMessage(): void;
     showError(reason): void;
@@ -20,14 +20,15 @@ interface IDocScope extends ng.IScope {
     updated:Date;
 }
 class DocCtrl{
+    constructor($scope: IDocScope,public Data: any){
 
-    constructor($scope: IDocScope, data: any){
-        $scope.data = data;
+        $scope.data = this.Data;
         //$scope.model = new Models.VacationApproval($scope.data.data,param);
 
         $scope.validate = function () {
             $scope.model.Errors.SetDirty();
             $scope.model.Validate();
+            return $scope.model.ValidateAsync();
         }
 
         $scope.reset = function(){
@@ -45,66 +46,118 @@ class DocCtrl{
         var updatedSuccess = function(response){
             $scope.updated = new Date();
         }
-
+        var self = this;
         $scope.save = function() {
-            $scope.validate();
-            if ($scope.model.Errors.HasErrors) {
-                return;
-            }
-
-            $scope.data.$saveOrUpdate(createdSuccess,updatedSuccess,$scope.showError, $scope.showError)
+            $scope.validate().then(function (result) {
+                if ($scope.model.Errors.HasErrors) {
+                    return;
+                }
+                self.OnBeforeSave();
+                $scope.data.$saveOrUpdate(createdSuccess, updatedSuccess, $scope.showError, $scope.showError);
+            },$scope.showError);
         }
 
 
         $scope.showError = function(reason){
             alert(reason);
         }
-
+    }
+    public OnBeforeSave(){
+        this.Data["Updated"] = new Date();
     }
 }
 
 angular.module('myApp.controllers', [])
     .controller('ErrorCtrl',function($scope,$translate)
     {
-        $scope.model.Errors["SummaryMessage"] = function () {
-            if (!this.HasErrors) return "";
-            var errorCount = this.ErrorCount;
-            switch (errorCount) {
-                case 0:
-                    return "";
-                case 1:
-                    return Validation.StringFce.format("{ErrorCount} error.", this);
-                case 2:
-                case 3:
-                case 4:
-                    return Validation.StringFce.format("{ErrorCount} errors.", this);
-                default:
-                    return Validation.StringFce.format("{ErrorCount} errors.", this);
-            }
-        };
+//        $translate('Error').then(function() {
+//
+//        });
+
+//        $scope.model.Errors["SummaryMessage"] = function () {
+//            if (!this.HasErrors) return "";
+//            var errorCount = this.ErrorCount;
+//            switch (errorCount) {
+//                case 0:
+//                    return "";
+//                case 1:
+//                    return Validation.StringFce.format("{ErrorCount} error.", this);
+//                case 2:
+//                case 3:
+//                case 4:
+//                    return Validation.StringFce.format("{ErrorCount} errors.", this);
+//                default:
+//                    return Validation.StringFce.format("{ErrorCount} errors.", this);
+//            }
+//        };
 
 
     })
 
-    .controller('DocsCtrl',function($scope,$http,$location,Doc) {
-        Doc.all(function(docs){
-            $scope.docs = docs;
-            $scope.edit = function(id){
-                if (id != undefined) {
-                    $location.path("/edit/" + id);
-                }
+    .controller('DocsCtrl',function($scope,$http,$location,Doc,$translate,$translatePartialLoader) {
 
+        $translatePartialLoader.addPart('docs');
+        $translate.refresh();
+        var queryByLastName = {'data.Employee.LastName':'Samcova'};
+        var today = moment().startOf('days').toDate();
+        var tomorrow = moment().startOf('days').add({'days':1}).toDate();
+        var end = new Date(2020,1,1);
+
+//        var queryFuture = {$query: {'data.Duration.From':{"$gte": tomorrow}, $orderby:{'data.Duration.From': 1}}};
+        var queryFuture = { 'data.Duration.From':{"$gte": tomorrow}};
+        var queryToday = {'data.Duration.From':{"$gte": today, "$lt": tomorrow}};
+        var queryOld = {'data.Duration.To':{"$lt": today}};
+
+        var options = {sort:{'data.Duration.From':1}}
+
+        $scope.search = {};
+        $scope.getAllDocs = function() {
+            Doc.all(function (docs) {
+                $scope.docs = docs;
+            });
+        }
+        $scope.getAllDocs();
+
+        Doc.query(queryFuture,options,function(docs){
+            $scope.docsQueryFuture = docs;
+        });
+        Doc.query(queryToday,options,function(docs){
+            $scope.docsQueryToday = docs;
+        });
+        Doc.query(queryOld,options,function(docs){
+            $scope.docsQueryOld = docs;
+        });
+
+        $scope.edit = function(id){
+            if (id != undefined) {
+                $location.path("/edit/" + id);
             }
 
-            $scope.selection = [];
+        }
 
-            $scope.toggle = function (idx) {
-                var pos = $scope.selection.indexOf(idx);
-                if (pos == -1) {
-                    $scope.selection.push(idx);
-                } else {
-                    $scope.selection.splice(pos, 1);
-                }
-            };
-        });
+        $scope.selection = [];
+
+        $scope.toggle = function (idx) {
+            var pos = $scope.selection.indexOf(idx);
+            if (pos == -1) {
+                $scope.selection.push(idx);
+            } else {
+                $scope.selection.splice(pos, 1);
+            }
+        };
+
+
+        $scope.cancelDocs = function(){
+            if ($scope.selection.length == 0) return;
+
+            var toRemove = _.filter($scope.docs,function(item:any) {
+                return $scope.selection.indexOf(item.$id())!=-1}
+            );
+            _.each(toRemove,function(item:any){
+                item.$remove();
+            });
+
+            $scope.getAllDocs();
+        }
+
     });
