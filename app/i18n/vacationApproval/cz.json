@@ -12,6 +12,7 @@
 	"Deputy1": "Zástupce",
 	"Deputy2": "Další zástupce",
 
+
     "DeputyConflict": "Zástupce - konflikty",
 	"VacationDuration": "Doba dovolené",
     "BeforeDate": {
@@ -29,6 +30,11 @@
 
     "NoErrors": "Neexistují žádné chyby.",
     "Errors": "Chyby",
-    "DAYS_TEXT": "den(dnů)"
+    "DAYS_TEXT": "den(dnů)",
+
+    "Approval": "Schválení",
+    "ApprovedBy": "Schváleno kým",
+    "Approved": "Schváleno",
+    "ApprovedDate": "Datum schválení"
 
 }

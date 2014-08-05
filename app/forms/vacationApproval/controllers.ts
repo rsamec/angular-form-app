@@ -1,7 +1,7 @@
 ///<reference path='../../../typings/angularjs/angular.d.ts'/>
 ///<reference path='../../../typings/node-form/node-form.d.ts'/>
 
-///<reference path='../../js/controllers.ts'/>
+///<reference path='../../js/DocCtrl.ts'/>
 ///<reference path='../../bower_components/node-form-models/dist/vacationApproval/vacationApproval.d.ts'/>
 
 class VacationApprovalCtrl extends DocCtrl{
@@ -105,10 +105,25 @@ class VacationApprovalCtrl extends DocCtrl{
             if (!from.isValid() || !to.isValid()) return undefined;
             return $scope.model.Duration.VacationDaysCount;
         }
+
+        $scope.copyApprovedBy = function(){
+            var source =$scope.model.Data.Approval.ApprovedBy;
+            var target =$scope.model.Data.Deputy1;
+            if (target === undefined) $scope.model.Data.Deputy1 = {};
+//            if (source.Checked) {
+                //target.Checked = source.Checked;
+                target.FirstName = source.FirstName;
+                target.LastName = source.LastName;
+                target.Email = source.Email;
+
+        }
     }
+
 
     public OnBeforeSave(){
         super.OnBeforeSave();
+        this.Data.name = "VacationRequest";
+        this.Data.desc = this.Model.Data.Employee.FirstName + " " + this.Model.Data.Employee.LastName;
         this.Model.Data.Duration.Days = this.Model.Duration.VacationDaysCount;
     }
 }

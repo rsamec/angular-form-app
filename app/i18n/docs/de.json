@@ -17,12 +17,14 @@
     "DocOperationButtonClose":"Zumachen",
 
     "Deputy": "Verterter:",
-    "VacationRequest": "Urlaub anforderung",
 
     "VacationApprovalHistory": "History urlaubs",
     "VacationApprovalFuture": "Planete urlaube",
     "VacationApprovalToday": "Tagliceh urlaube",
 
     "Search": "Suchen",
-    "SearchText": "Suchen"
+    "SearchText": "Suchen",
+
+    "VacationRequest": "Urlaub anforderung",
+    "Invoice":"Fakture"
 }

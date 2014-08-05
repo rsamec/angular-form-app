@@ -16,12 +16,15 @@
     "DocOperationButtonClose":"Close",
 
     "Deputy": "Deputed by:",
-    "VacationRequest": "Vacation request",
+
 
     "VacationApprovalHistory": "History vacations",
     "VacationApprovalFuture": "Future vacations",
     "VacationApprovalToday": "Today vacations",
 
     "Search": "Submit",
-    "SearchText": "Search"
+    "SearchText": "Search",
+
+    "VacationRequest": "Vacation request",
+    "Invoice":"Invoce"
 }

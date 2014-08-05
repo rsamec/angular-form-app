@@ -16,9 +16,8 @@
 		"Format": "MM/DD/YYYY",
 		"Msg": "Date '{From}' must be before '{To}'."
 	},
-    "RangeDuration": "Vacation duration value must be between {MinDays} and {MaxDays} days.",
-    "ExcludedDaysMsg":"These excluded days are not in range: '{ExcludedDates}'.",
-
+	"RangeDuration": "Vacation duration value must be between {MinDays} and {MaxDays} days.",
+	"ExcludedDaysMsg": "These excluded days are not in range: '{ExcludedDates}'.",
 	"VacationDuration": "Vacation duration",
 	"isWeekday": "Please select weekdays, weekends are not permitted.",
 	"dateCompareExt": {
@@ -27,5 +26,10 @@
 	},
 	"NoErrors": "There are no errors.",
 	"Errors": "Errors",
-	"DAYS_TEXT": "days(s)"
+	"DAYS_TEXT": "days(s)",
+
+    "Approval": "Approval",
+    "ApprovedBy": "ApprovedBy",
+    "Approved": "Approved",
+    "ApprovedDate": "ApprovedDate"
 }

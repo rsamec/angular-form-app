@@ -10,6 +10,13 @@ var filterModule = angular.module('myApp.filters', []);
     };
   }]);
 
+filterModule.filter('shorten', function() {
+    return function(text, number) {
+        if (number === undefined) number = 20;
+        return String(text).length >number? String(text).substr(0,number) + "..." :text;
+    };
+});
+
 filterModule.filter('successSave', ['$filter', function ($filter) {
     return function (input, format) {
         if (!!!input) return undefined;

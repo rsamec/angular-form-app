@@ -16,13 +16,17 @@
     "DocOperationButtonClose":"Zavřít",
 
     "Deputy": "Zástupce:",
-    "VacationRequest": "Dovolenka",
 
     "VacationApprovalHistory": "Historie dovolených",
     "VacationApprovalFuture": "Plánované dovolené",
     "VacationApprovalToday": "Dnešní dovolené",
 
     "Search": "Potvrdit",
-    "SearchText": "Hledat"
+    "SearchText": "Hledat",
+
+
+    "VacationRequest": "Dovolenka",
+    "Invoice":"Faktura"
+
 
 }

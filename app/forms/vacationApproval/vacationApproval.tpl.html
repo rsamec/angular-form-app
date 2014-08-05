@@ -90,25 +90,49 @@
     <div class="form-group"></div>
     <div class="form-group"></div>
 
-    <!--<div class="form-group">-->
-        <!--<div class="col-xs-offset-2 col-xs-10">-->
-            <!--<div class="checkbox">-->
-                <!--<label>-->
-                    <!--<input type="checkbox" ng-model="model.Data.Deputy1.Checked">{{'Deputy1' | translate}}-->
-                <!--</label>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="form-group">
+        <label class="col-xs-2 control-label">{{'Manager' | translate}}:</label>
+
+        <div class="col-xs-4 col-sm-3 col-md-2">
+            <input type="text" class="form-control" placeholder="{{'FirstName' | translate}}"
+                   ng-model="model.Data.Approval.ApprovedBy.FirstName"
+                   rule="model.ApprovedByValidator">
+
+            <div class="validation-error">
+                {{model.ApprovedByValidator.Rules["FirstName"].ErrorMessage}}
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+            <input type="text" class="form-control" placeholder="{{'LastName' | translate}}"
+                   ng-model="model.Data.Approval.ApprovedBy.LastName"
+                   rule="model.ApprovedByValidator">
+
+            <div class="validation-error">
+                {{model.ApprovedByValidator.Rules["LastName"].ErrorMessage}}
+            </div>
+        </div>
+    </div>
+    <field rule="model.ApprovedByValidator" ng-model="model.Data.Approval.ApprovedBy.Email" label="Email"></field>
+
+    <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.Data.Approval.ApprovedBy.Checked" ng-click="copyApprovedBy()">{{'DeputyIsManager' | translate}}
+                </label>
+            </div>
+        </div>
+    </div>
 
 
-    <!--<div ng-show="model.Data.Deputy1.Checked">-->
+    <!--<div ng-hide="model.Data.Approval.ApprovedBy.Checked">-->
 
         <div class="form-group">
             <label class="col-xs-2 control-label">{{'Deputy1' | translate}}:</label>
 
             <div class="col-xs-4 col-sm-3 col-md-2">
                 <input type="text" class="form-control" placeholder="{{'FirstName' | translate}}"
-                       ng-model="model.Data.Deputy1.FirstName"
+                       ng-model="model.Data.Deputy1.FirstName" ng-disabled="model.Data.Approval.ApprovedBy.Checked"
                        rule="model.Deputy1Validator">
 
                 <div class="validation-error">
@@ -117,7 +141,7 @@
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <input type="text" class="form-control" placeholder="{{'LastName' | translate}}"
-                       ng-model="model.Data.Deputy1.LastName"
+                       ng-model="model.Data.Deputy1.LastName" ng-disabled="model.Data.Approval.ApprovedBy.Checked"
                        rule="model.Deputy1Validator">
 
                 <div class="validation-error">
@@ -125,7 +149,16 @@
                 </div>
             </div>
         </div>
-        <field rule="model.Deputy1Validator" ng-model="model.Data.Deputy1.Email" label="Email"></field>
+    <div class="form-group">
+        <label class="col-xs-2 control-label">{{Email}}</label>
+        <div class="col-xs-10 col-sm-7 col-md-5">
+            <input type="text" class="form-control"  ng-model="model.Data.Deputy1.Email" ng-disabled="model.Data.Approval.ApprovedBy.Checked" placeholder="Email">
+            <div class="validation-error">
+                {{model.EmployeeValidator.Rules["Email"].ErrorMessage}}
+            </div>
+        </div>
+    </div>
+        <!--<field rule="model.Deputy1Validator" ng-model="model.Data.Deputy1.Email" ng-disabled="model.Data.Approval.ApprovedBy.Checked" label="Email"></field>-->
     <!--</div>-->
 
 

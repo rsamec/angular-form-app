@@ -28,6 +28,9 @@
 	"NoErrors": "Es gibt keine Fehler.",
 	"DAYS_TEXT": "Tag(e))",
 	"Errors": "Fehlers",
-	"required": "required",
-	"maxlength": "maxlength"
+
+    "Approval": "Bestaetig",
+    "ApprovedBy": "Bestaetig von",
+    "Approved": "Bestaetig",
+    "ApprovedDate": "Bestaetiges datum"
 }

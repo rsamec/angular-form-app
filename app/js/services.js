@@ -49,6 +49,9 @@ services.factory('vacationApproval',function(param){
 services.factory('Doc', function ($mongolabResourceHttp) {
     return $mongolabResourceHttp('docs');
 });
+services.factory('Form', function ($mongolabResourceHttp) {
+    return $mongolabResourceHttp('forms');
+});
 
 
 

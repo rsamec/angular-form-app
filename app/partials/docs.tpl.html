@@ -2,20 +2,46 @@
     <div ng-include src="'partials/header.tpl.html'"></div>
 </nav>
 
-<ul class="list-inline">
-    <li class="list-group" ng-repeat="doc in docs | vacationFilter:search.Text">
 
-        <a ng-dblclick="edit(doc.$id())" ng-click="toggle(doc.$id())" class="list-group-item"
-           ng-class="{'selected':selection.indexOf(doc.$id()) != -1}">
-            <h4 class="list-group-item-heading">{{doc.data.Employee | person}}</h4>
 
-            <p class="list-group-item-text">{{doc.data.Duration | duration:'dd.MM.yyyy'}}</p>
+<div class="panel panel-default">
+    <div class="panel-heading">{{'Forms'| translate}}</div>
+    <div class="panel-body">
+        <ul class="list-inline">
+            <li class="list-group" ng-repeat="form in forms | filter:search.Text">
 
-            <p class="list-group-item-text">{{'Deputy' | translate}}:<b>{{doc.data.Deputy1 | person}}</b></p>
-        </a>
+                <a ng-dblclick="newDoc(form.$id())" class="list-group-item">
+                    <h4 class="list-group-item-heading">{{form.shortName | translate }}</h4>
 
-    </li>
-</ul>
+                    <p class="list-group-item-text">{{form.desc | shorten}}</p>
+
+                    <!--<p class="list-group-item-text">{{form.desc}}</p>-->
+                </a>
+
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">{{'Documents'| translate}}</div>
+    <div class="panel-body">
+        <ul class="list-inline">
+            <li class="list-group" ng-repeat="doc in docs | filter:search.Text">
+
+                <a ng-dblclick="edit(doc.$id())" ng-click="toggle(doc.$id())" class="list-group-item"
+                   ng-class="{'selected':selection.indexOf(doc.$id()) != -1}">
+                    <h4 class="list-group-item-heading">{{doc.name}}</h4>
+
+                    <p class="list-group-item-text">{{doc.desc | shorten}}</p>
+
+                    <!--<p class="list-group-item-text"></p>-->
+                </a>
+
+            </li>
+        </ul>
+    </div>
+</div>
+
 
 <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
     <div class="container">
