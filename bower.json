@@ -18,6 +18,7 @@
     "moment": "~2.7.0",
     "underscore": "~1.6.0",
     "moment-range": "~1.0.2",
-    "angular-translate-loader-static-files-ceky": "~0.1.9"
+    "angular-translate-loader-static-files-ceky": "~0.1.9",
+    "node-form-models": "*"
   }
 }
