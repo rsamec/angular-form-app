@@ -24,3 +24,4 @@ angular.module('myApp.controllers', []).controller('ErrorCtrl', function ($scope
     //            }
     //        };
 }).controller('DocsCtrl', DocsCtrl).controller('VacationDashboardCtr', VacationDashboardCtrl);
+//# sourceMappingURL=controllers.js.map
