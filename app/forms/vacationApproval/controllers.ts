@@ -2,7 +2,7 @@
 ///<reference path='../../../typings/node-form/node-form.d.ts'/>
 
 ///<reference path='../../js/DocCtrl.ts'/>
-///<reference path='../../bower_components/node-form-models/dist/vacationApproval/vacationApproval.d.ts'/>
+///<reference path='../../../typings/vacationApproval/vacationApproval.d.ts'/>
 
 class VacationApprovalCtrl extends DocCtrl{
 
