@@ -5,9 +5,6 @@
 ///<reference path='VacationDashboardCtrl.ts'/>
 'use strict';
 
-
-
-
 angular.module('myApp.controllers', [])
     .controller('ErrorCtrl',function($scope,$translate)
     {
