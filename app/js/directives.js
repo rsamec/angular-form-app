@@ -24,7 +24,7 @@ uiControls.directive('rule', function ($timeout,$parse) {
             var getter = $parse(parentModel);
 
             ctrl.$viewChangeListeners.push(function(){
-                rule.ValidateField(getter(scope),propertyName);
+                rule.ValidateProperty(getter(scope),propertyName);
                 rule.ValidationResult.Errors[propertyName].IsDirty = true;
             });
         }
@@ -70,7 +70,7 @@ uiControls.directive('field', function ($timeout,$parse) {
             var getter = $parse(parentModel);
 
             ctrl.$viewChangeListeners.push(function(){
-                rule.ValidateField(getter(scope),propertyName);
+                rule.ValidateProperty(getter(scope),propertyName);
                 rule.ValidationResult.Errors[propertyName].IsDirty = true;
             });
 
@@ -97,7 +97,7 @@ uiControls.directive('validate', function () {
 
                 if (rule != undefined)
                 {
-                    rule.ValidateField();
+                    rule.ValidateProperty();
                     rule.ValidateAsyncEx(ctrl.$modelValue);
                 }
             }

@@ -15,6 +15,10 @@
   <link rel="stylesheet" href="css/app.css"/>
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
+<script>
+    //var require = function(){};
+    //var module = {};//{exports:{}};
+</script>
 <body>
 
   <!--[if lt IE 7]>
@@ -42,17 +46,19 @@
   <script src="lib/mongodb/mongolabResourceHttp.js"></script>
 
 
-  <script src="bower_components/form/dist/form.js"></script>
-  <script src="bower_components/form/dist/customValidators/DateCompareValidator.js"></script>
+  <script src="bower_components/business-rules-engine/dist/module/Validation.js"></script>
+  <script src="bower_components/business-rules-engine/dist/module/DateCompareValidator.js"></script>
+  <script src="bower_components/business-rules-engine/dist/module/BasicValidators.js"></script>
+  <script src="bower_components/business-rules-engine/dist/module/Utils.js"></script>
 
-  <script src="bower_components/form/dist/i18n/messages_cs.js"></script>
+  <script src="bower_components/business-rules-engine/dist/module/i18n/messages_cs.js"></script>
   <script src="lib/angular-locale/angular-locale_cs-cz.js"></script>
 
   <!--<script src="bower_components/form/dist/i18n/messages_de.js"></script>-->
   <!--<script src="lib/angular-locale/angular-locale_de.js"></script>-->
 
 
-  <script src="bower_components/node-form-models/dist/vacationApproval/vacationApproval.js"></script>
+  <script src="bower_components/business-rules/dist/vacationApproval/business-rules.js/"></script>
 
 
   <script src="js/ListCtrl.js"></script>

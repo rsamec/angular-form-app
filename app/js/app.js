@@ -84,14 +84,14 @@ app.config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider',
 
         _.extend(Validation.MessageLocalization.defaultMessages, Localization.ValidationMessages);
 
-        $routeProvider.when('/edit/:id', {templateUrl: 'partials/form.tpl.html', controller: 'VacationApprovalCtrl',
+        $routeProvider.when('/edit/:id', {templateUrl: 'partials/form.tpl.html', controller: 'VacationApprovalCtrl', controllerAs:'va',
             resolve: {
                 docInstance: function ($route, Doc) {
                     return Doc.getById($route.current.params.id);
                 }
             }
         })
-        $routeProvider.when('/new/:id', {templateUrl: 'partials/form.tpl.html', controller: 'VacationApprovalCtrl',
+        $routeProvider.when('/new/:id', {templateUrl: 'partials/form.tpl.html', controller: 'VacationApprovalCtrl', controllerAs:'va',
             resolve: {
                 docInstance: function (Doc) {
                     var doc = new Doc();
@@ -100,7 +100,7 @@ app.config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider',
                 }
             }
         })
-        $routeProvider.when('/new', {templateUrl: 'partials/form.tpl.html', controller: 'VacationApprovalCtrl',
+        $routeProvider.when('/new', {templateUrl: 'partials/form.tpl.html', controller: 'VacationApprovalCtrl',controllerAs:'va',
             resolve: {
                 docInstance: function (Doc) {
                     var doc = new Doc();

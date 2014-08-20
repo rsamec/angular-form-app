@@ -1,5 +1,6 @@
+///<reference path='../../typings/moment/moment.d.ts'/>
 ///<reference path='../../typings/angularjs/angular.d.ts'/>
-///<reference path='../../typings/node-form/node-form.d.ts'/>
+///<reference path='../../typings/business-rules-engine/business-rules-engine.d.ts'/>
 ///<reference path='ListCtrl.ts'/>
 
 interface IVacationDashboardScope extends IGenericListScope {

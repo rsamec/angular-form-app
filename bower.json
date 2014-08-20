@@ -12,13 +12,13 @@
     "angular-mocks": "~1.2.x",
     "html5-boilerplate": "~4.3.0",
     "bootstrap": "~3.2.0",
-    "form": "*",
     "angular-bootstrap": "~0.11.0",
     "angular-translate": "~2.2.0",
     "moment": "~2.7.0",
     "underscore": "~1.6.0",
     "moment-range": "~1.0.2",
-    "node-form-models": "*",
-    "angular-translate-loader-partial": "~2.0.1"
+    "angular-translate-loader-partial": "~2.0.1",
+    "business-rules": "*",
+    "business-rules-engine": "*"
   }
 }

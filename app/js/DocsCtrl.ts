@@ -1,5 +1,5 @@
 ///<reference path='../../typings/angularjs/angular.d.ts'/>
-///<reference path='../../typings/node-form/node-form.d.ts'/>
+///<reference path='../../typings/business-rules-engine/business-rules-engine.d.ts'/>
 ///<reference path='ListCtrl.ts'/>
 
 interface IDocsScope extends  IGenericListScope  {
@@ -12,6 +12,7 @@ interface IDocsScope extends  IGenericListScope  {
     forms:any;
     docs:any;
  }
+
 class DocsCtrl extends GenericListCtrl {
     constructor($scope: IDocsScope,Doc,Form,$location,$translate,$translatePartialLoader) {
         super($scope);

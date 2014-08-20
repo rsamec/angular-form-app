@@ -1,41 +1,30 @@
-FormValidationApp
+angular-form-app
 =================
 
-Demo for form validation engine
+This application demonstrates usage of business rules engine [business-rules-engine](https://github.com/rsamec/business-rules-engine) in AngularJS.
+It uses example of [vacation approval business rules] (https://github.com/rsamec/business-rules/blob/master/dist/vacationApproval/README.md) - see [API documentation] (http://rsamec.github.io/business-rules/docs/classes/vacationapproval.businessrules.html).
+
+Application consists:
++   display vacation request form
++   how to use business rules for vacation approval on this form
++   business rules workflows (work in progress)
+
+[Demo] (http://nodejs-formvalidation.rhcloud.com/)
+
+More complex usages of business rules engine [Tutorial](https://github.com/rsamec/business-rules-engine/wiki).
+Find more business rules example in [business rules repository] (https://github.com/rsamec/business-rules) - see [API documentation] (http://rsamec.github.io/business-rules/docs/globals.html).
+
+
 
 ### Download or clone git repository.
 
 ``` bash
-git clone https://github.com/rsamec/FormValidationApp
-```
-
-### Install dependencies
-
-``` bash
-cd myProject
-npm install
+git clone https://github.com/rsamec/angular-form-app
 npm start
+grunt app - compile typescript source to js
 ```
 
-
-### Business rules for vacation
-
-Vacation request - basic business rules
-
-+   name -> first name + last name is required
-+   duration
-    +   from and to is required
-    +   from and to must be valid dates (expect weekends)
-    +   from and to must be greater or queal today
-    +   from and to must be less or queal 1 year
-    +   from must be at least one day before to
-+   deputy
-    +   first name + last name of deputy is required
-    +   contact (email) is required
-    +   can not select deputy have approved vacation at the same days (async)
-+   at least one deputy is required -> second deputy is optional
-
-### Business workflows
+### Business workflows (work in progress)
 
 Vacation request
 +   each employee can create request
