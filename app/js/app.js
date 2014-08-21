@@ -74,7 +74,7 @@ app.config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider',
 
         $translatePartialLoaderProvider.addPart('docs');
         $translateProvider.useLoader('$translatePartialLoader', {
-            urlTemplate: '/app/i18n/{part}/{lang}.json'
+            urlTemplate: '/i18n/{part}/{lang}.json'
         });
 
 //    $translateProvider.useStaticFilesLoader({
