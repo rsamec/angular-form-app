@@ -32,9 +32,10 @@ body { padding-top: 70px; }
 body { padding-bottom: 70px; }
 
 .selected {
-    background: yellow;
+    background: #158CBA;
+    color: white;
 }
 .validation-error{
-    color: darkred;
+    color:darkred;
 }
 

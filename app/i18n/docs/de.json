@@ -26,5 +26,12 @@
     "SearchText": "Suchen",
 
     "VacationRequest": "Urlaub anforderung",
-    "Invoice":"Fakture"
+    "Invoice":"Fakture",
+
+    "Name":"Name",
+
+    "Language":"Sprache",
+    "English":"englisch",
+    "German":"deutsch",
+    "Czech":"tschechisch"
 }

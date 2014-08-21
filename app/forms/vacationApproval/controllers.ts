@@ -1,12 +1,14 @@
 ///<reference path='../../../typings/angularjs/angular.d.ts'/>
 ///<reference path='../../../typings/business-rules-engine/business-rules-engine.d.ts'/>
-
+///<reference path='../../../typings/jquery/jquery.d.ts'/>
+///<reference path='../../../typings/underscore/underscore.d.ts'/>
 ///<reference path='../../js/DocCtrl.ts'/>
 ///<reference path='../../bower_components/business-rules/dist/vacationApproval/business-rules.d.ts'/>
-
+var Localization:any;
 class VacationApprovalCtrl extends DocCtrl {
 
     public model:VacationApproval.BusinessRules;
+
 
     //vacation approval ctrl props
     public vacationDays:Array<any>;
@@ -23,10 +25,21 @@ class VacationApprovalCtrl extends DocCtrl {
         $translatePartialLoader.addPart('vacationApproval');
         $translate.refresh();
 
+        $scope.changeLanguage = function (langKey) {
+            $translate.use(langKey);
+            $translate.refresh();
+            $.getScript("bower_components/business-rules-engine/dist/module/i18n/messages_" + langKey + ".js", function(){
+               _.extend(Validation.MessageLocalization.defaultMessages, Localization.ValidationMessages);
+               $scope.va.model.Validate();
+            })
+        };
+
+
+
         this.model = new VacationApproval.BusinessRules(this.data.data, param);
 
         if (this.model.Data.Duration === undefined) this.model.Data.Duration = {From: new Date(), To: new Date()};
-
+        if (this.model.Data.Deputy1 === undefined) this.model.Data.Deputy1 = {FirstName:undefined,LastName:undefined};
 
         this.name = "VacationRequest";
 
@@ -39,6 +52,19 @@ class VacationApprovalCtrl extends DocCtrl {
             function (newValue, oldValue, scope) {
                 if (!!!newValue) scope.va.resetExcludedDays();
             });
+
+
+        $scope.$watch('va.model.Data.Approval.ApprovedBy',
+            function (newValue, oldValue, scope) {
+                scope.va.copyApprovedBy();
+            },true);
+
+        $scope.$watch('va.model.Data.Approval.Checked',
+            function (newValue, oldValue, scope) {
+                scope.va.copyApprovedBy();
+            },true);
+
+
 
         this.vacationDays = [];
 
@@ -70,10 +96,7 @@ class VacationApprovalCtrl extends DocCtrl {
 
 
     public excludedDaysContains(idx) {
-        return this.excludedDaysIndexOf(idx) != -1;
-
-        //return _.any(this.excludedDays,function(item:Date) {return moment(item).isSame(idx);})
-        //return this.excludedDays.indexOf(idx) != -1;
+        return this.excludedDaysIndexOf(idx) !== -1;
     }
 
     public excludedDaysIndexOf(idx) {
@@ -125,14 +148,16 @@ class VacationApprovalCtrl extends DocCtrl {
     }
 
     public copyApprovedBy() {
-        var source = this.model.Data.Approval.ApprovedBy;
-        var target = this.model.Data.Deputy1;
-        //if (target === undefined) this.model.Data.Deputy1 = {};
-//            if (source.Checked) {
-        //target.Checked = source.Checked;
-        target.FirstName = source.FirstName;
-        target.LastName = source.LastName;
-        target.Email = source.Email;
+        if (this.model.Data.Approval !== undefined && this.model.Data.Approval.ApprovedBy.Checked) {
+            var source = this.model.Data.Approval.ApprovedBy;
+            var target = this.model.Data.Deputy1;
+
+            target.FirstName = source.FirstName;
+            target.LastName = source.LastName;
+            target.Email = source.Email;
+
+            this.model.Deputy1Validator.ValidateAll(target);
+        }
 
     }
 

@@ -1,6 +1,6 @@
 ///<reference path='../../typings/underscore/underscore.d.ts'/>
 
-class Utils {
+class AppUtils {
 
     static get R_ISO8061_STR(): RegExp { return /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?:\:?(\d\d)(?:\:?(\d\d)(?:\.(\d{3}))?)?)?(Z|([+-])(\d\d):?(\d\d)))?$/;}
 
@@ -13,10 +13,10 @@ class Utils {
      */
     static transformDatesToISOString(obj) {
         if (_.isDate(obj)) {
-            return Utils.toLocalISOString(obj);
+            return AppUtils.toLocalISOString(obj);
         } else if (_.isArray(obj) || _.isObject(obj)) {
             _.forEach(obj, function (val, name) {
-                obj[name] = Utils.transformDatesToISOString(val);
+                obj[name] = AppUtils.transformDatesToISOString(val);
             });
         }
         return obj;
@@ -30,10 +30,10 @@ class Utils {
      */
     static transformISOStringToDates(obj) {
         if (_.isString(obj) && 15 <= obj.length && obj.length <= 24) {
-            return Utils.toLocalISODate(obj);
+            return AppUtils.toLocalISODate(obj);
         } else if (_.isArray(obj) || _.isObject(obj)) {
             _.forEach(obj, function (val, name) {
-                obj[name] = Utils.transformISOStringToDates(val);
+                obj[name] = AppUtils.transformISOStringToDates(val);
             });
         }
         return obj;
@@ -74,7 +74,7 @@ class Utils {
             return parseInt(value, 10);
         }
         var match;
-        if (match = string.match(Utils.R_ISO8061_STR)) {
+        if (match = string.match(AppUtils.R_ISO8061_STR)) {
             var date = new Date(0),
                 tzHour = 0,
                 tzMin = 0;

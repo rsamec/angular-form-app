@@ -118,7 +118,7 @@
         <div class="col-xs-offset-2 col-xs-10">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="va.model.Data.Approval.ApprovedBy.Checked" ng-click="copyApprovedBy()">{{'DeputyIsManager' | translate}}
+                    <input type="checkbox" ng-model="va.model.Data.Approval.ApprovedBy.Checked" ng-click="va.copyApprovedBy()">{{'DeputyIsManager' | translate}}
                 </label>
             </div>
         </div>
@@ -135,7 +135,7 @@
                        ng-model="va.model.Data.Deputy1.FirstName" ng-disabled="va.model.Data.Approval.ApprovedBy.Checked"
                        rule="va.model.Deputy1Validator">
 
-                <div class="validation-error">
+                <div ng-show="va.model.Deputy1Validator.ValidationResult.HasErrors" class="validation-error">
                     {{va.model.Deputy1Validator.Rules["FirstName"].ErrorMessage}}
                 </div>
             </div>
@@ -144,8 +144,8 @@
                        ng-model="va.model.Data.Deputy1.LastName" ng-disabled="va.model.Data.Approval.ApprovedBy.Checked"
                        rule="va.model.Deputy1Validator">
 
-                <div class="validation-error">
-                    {{va.model.EmployeeValidator.Rules["LastName"].ErrorMessage}}
+                <div ng-show="va.model.Deputy1Validator.ValidationResult.HasErrors" class="validation-error">
+                    {{va.model.Deputy1Validator.Rules["LastName"].ErrorMessage}}
                 </div>
             </div>
         </div>
@@ -153,8 +153,8 @@
         <label class="col-xs-2 control-label">{{Email}}</label>
         <div class="col-xs-10 col-sm-7 col-md-5">
             <input type="text" class="form-control"  ng-model="va.model.Data.Deputy1.Email" ng-disabled="va.model.Data.Approval.ApprovedBy.Checked" placeholder="Email">
-            <div class="validation-error">
-                {{va.model.EmployeeValidator.Rules["Email"].ErrorMessage}}
+            <div ng-show="va.model.Deputy1Validator.ValidationResult.HasErrors" class="validation-error">
+                {{va.model.Deputy1Validator.Rules["Email"].ErrorMessage}}
             </div>
         </div>
     </div>

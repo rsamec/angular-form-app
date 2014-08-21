@@ -19,6 +19,7 @@
     "moment-range": "~1.0.2",
     "angular-translate-loader-partial": "~2.0.1",
     "business-rules": "*",
-    "business-rules-engine": "*"
+    "business-rules-engine": "*",
+    "jquery.cookie": "~1.4.1"
   }
 }

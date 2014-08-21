@@ -12,19 +12,13 @@ interface IVacationDashboardScope extends IGenericListScope {
 }
 class VacationDashboardCtrl extends GenericListCtrl {
     constructor($scope: IVacationDashboardScope,Doc,$location,$translate,$translatePartialLoader) {
-        super($scope);
-
-        $translatePartialLoader.addPart('docs');
-        $translate.refresh();
-
+        super($scope,$translate,$translatePartialLoader);
 
         $scope.edit = function(id){
             if (id != undefined) {
                 $location.path("/edit/" + id);
             }
         }
-
-
 
         var today = moment().startOf('days').toDate();
         var tomorrow = moment().startOf('days').add({'days':1}).toDate();

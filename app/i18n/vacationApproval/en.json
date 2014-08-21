@@ -31,5 +31,8 @@
     "Approval": "Approval",
     "ApprovedBy": "ApprovedBy",
     "Approved": "Approved",
-    "ApprovedDate": "ApprovedDate"
+    "ApprovedDate": "ApprovedDate",
+
+    "Manager":"Manager",
+    "DeputyIsManager": "Deputy is manager"
 }

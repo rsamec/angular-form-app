@@ -32,5 +32,8 @@
     "Approval": "Bestaetig",
     "ApprovedBy": "Bestaetig von",
     "Approved": "Bestaetig",
-    "ApprovedDate": "Bestaetiges datum"
+    "ApprovedDate": "Bestaetiges datum",
+
+    "Manager":"Manager",
+    "DeputyIsManager": "Vertreter is manager"
 }

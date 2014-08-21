@@ -26,5 +26,12 @@
     "SearchText": "Search",
 
     "VacationRequest": "Vacation request",
-    "Invoice":"Invoce"
+    "Invoice":"Invoce",
+
+    "Name":"Name",
+
+    "Language":"Language",
+    "English":"English",
+    "German":"German",
+    "Czech":"Czech"
 }

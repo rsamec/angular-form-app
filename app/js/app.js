@@ -26,7 +26,7 @@ app.config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider',
                     // console.log(config); // Contains the data about the request before it is sent.
                     if (config.data === undefined) return config;
                     var data = angular.copy(config.data);
-                    Utils.transformDatesToISOString(data);
+                    AppUtils.transformDatesToISOString(data);
                     config.data = data;
                     return config;
 
@@ -45,7 +45,7 @@ app.config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider',
                     // console.log(response); // Contains the data from the response.
 
                     // Return the response or promise.
-                    Utils.transformISOStringToDates(response.data);
+                    AppUtils.transformISOStringToDates(response.data);
                     return response;
                 },
 
@@ -58,6 +58,8 @@ app.config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider',
                 }
             };
         });
+
+
 
         // Add the interceptor to the $httpProvider.
         $httpProvider.interceptors.push('MyHttpInterceptor');
@@ -80,7 +82,7 @@ app.config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider',
 //        suffix: '.json'
 //    });
 
-        $translateProvider.preferredLanguage('cz');
+        $translateProvider.preferredLanguage('en');
 
         _.extend(Validation.MessageLocalization.defaultMessages, Localization.ValidationMessages);
 
@@ -113,5 +115,22 @@ app.config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider',
         $routeProvider.when('/dashboard', {templateUrl: 'partials/dashboard.tpl.html', controller: 'VacationDashboardCtrl'});
         $routeProvider.otherwise({redirectTo: '/docs'});
     }]);
+
+$().ready(function() {
+    /* For theme switching */
+    var themeName = $.cookie("themeName");
+    var themePath = $.cookie("themePath");
+    if (themeName !== undefined) {
+        setTheme(themeName, themePath);
+    }
+});
+
+function setTheme(themeName, themePath) {
+
+    $('#bootstrapTheme').attr('href',themePath.substr(1) + "bootstrap.css");
+    $.cookie("themeName", themeName, { expires: 7, path: "/" });
+    $.cookie("themePath", themePath, { expires: 7, path: "/" });
+}
+
 
 

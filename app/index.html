@@ -11,7 +11,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!--<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">-->
+  <link rel="stylesheet"  id="bootstrapTheme" href="css/themes/lumen/bootstrap.min.css">
   <link rel="stylesheet" href="css/app.css"/>
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
@@ -32,6 +33,7 @@
   -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/underscore/underscore.js"></script>
@@ -40,6 +42,7 @@
   <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script src="bower_components/angular-translate/angular-translate.js"></script>
+
   <!--<script src="bower_components/angular-translate-loader-static-files-ceky/angular-translate-loader-static-files.js"></script>-->
   <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
 
@@ -50,15 +53,19 @@
   <script src="bower_components/business-rules-engine/dist/module/DateCompareValidator.js"></script>
   <script src="bower_components/business-rules-engine/dist/module/BasicValidators.js"></script>
   <script src="bower_components/business-rules-engine/dist/module/Utils.js"></script>
+  <script src="bower_components/business-rules/dist/vacationApproval/business-rules.js/"></script>
 
-  <script src="bower_components/business-rules-engine/dist/module/i18n/messages_cs.js"></script>
-  <script src="lib/angular-locale/angular-locale_cs-cz.js"></script>
+  <!--<script src="bower_components/business-rules-engine/dist/module/i18n/messages_cz.js"></script>-->
+  <!--<script src="lib/angular-locale/angular-locale_cs-cz.js"></script>-->
 
-  <!--<script src="bower_components/form/dist/i18n/messages_de.js"></script>-->
+
+  <!--<script src="bower_components/business-rules-engine/dist/module/i18n/messages_de.js"></script>-->
   <!--<script src="lib/angular-locale/angular-locale_de.js"></script>-->
 
+  <script src="bower_components/business-rules-engine/dist/module/i18n/messages_en.js"></script>
+  <script src="lib/angular-locale/angular-locale_en.js"></script>
 
-  <script src="bower_components/business-rules/dist/vacationApproval/business-rules.js/"></script>
+
 
 
   <script src="js/ListCtrl.js"></script>

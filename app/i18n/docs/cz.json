@@ -26,7 +26,14 @@
 
 
     "VacationRequest": "Dovolenka",
-    "Invoice":"Faktura"
+    "Invoice":"Faktura",
+
+    "Name": "Jméno a příjmení",
+
+    "Language":"Jazyk",
+    "English":"anglicky",
+    "German":"německy",
+    "Czech":"česky"
 
 
 }

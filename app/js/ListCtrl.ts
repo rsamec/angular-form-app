@@ -4,11 +4,27 @@
 interface IGenericListScope extends ng.IScope {
     selection:Array<string>;
     toggle(id:string):void;
+    changeLanguage(langKey:string):void;
 
     search:any;
  }
+var Localization:any;
 class GenericListCtrl{
-    constructor($scope: IGenericListScope) {
+    constructor($scope: IGenericListScope,$translate,$translatePartialLoader) {
+
+
+        $translatePartialLoader.addPart('docs');
+        $translate.refresh();
+
+
+        $scope.changeLanguage = function (langKey) {
+            $translate.use(langKey);
+            $translate.refresh();
+            $.getScript("bower_components/business-rules-engine/dist/module/i18n/messages_" + langKey + ".js", function(){
+                _.extend(Validation.MessageLocalization.defaultMessages, Localization.ValidationMessages);
+            })
+        };
+
 
         $scope.search = {};
         $scope.selection = [];

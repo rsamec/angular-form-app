@@ -125,7 +125,7 @@ uiControls.directive('error', function ($translate) {
                 }
                 $translate(scope.error.TranslateArgs.TranslateId).then(function (errMsg) {
                     if (scope.error.TranslateArgs.CustomMessage != undefined){
-                        scope.errMsg = scope.error.TranslateArgs.CustomMessage(JSON.parse(errMsg), scope.error.TranslateArgs.MessageArgs);
+                        scope.errMsg = scope.error.TranslateArgs.CustomMessage(errMsg, scope.error.TranslateArgs.MessageArgs);
                     }else {
                         scope.errMsg = Validation.StringFce.format(errMsg, scope.error.TranslateArgs.MessageArgs);
                     }},
@@ -160,7 +160,7 @@ uiControls.directive('valResult', function ($translate) {
             var translateMsg = function(arg,defaultErrorMsg) {
                 $translate(arg.TranslateId).then(function (errMsg) {
                         if (arg.CustomMessage != undefined) {
-                            element.append(arg.CustomMessage(JSON.parse(errMsg), arg.MessageArgs));
+                            element.append(arg.CustomMessage(errMsg, arg.MessageArgs));
                         } else {
                             element.append(Validation.StringFce.format(errMsg, arg.MessageArgs))
                         }
@@ -184,8 +184,10 @@ uiControls.directive('valResult', function ($translate) {
             };
 
             translateMsgs();
-
-            scope.$watch("valResult.ErrorMessage",function(){
+            var errorChanged =  function(){
+                return scope.valResult.ErrorMessage;
+            }
+            scope.$watch(errorChanged,function(){
                 element.html('');
                 translateMsgs();
             },true)

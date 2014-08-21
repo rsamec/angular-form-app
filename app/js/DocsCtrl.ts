@@ -1,4 +1,5 @@
 ///<reference path='../../typings/angularjs/angular.d.ts'/>
+///<reference path='../../typings/jquery/jquery.d.ts'/>
 ///<reference path='../../typings/business-rules-engine/business-rules-engine.d.ts'/>
 ///<reference path='ListCtrl.ts'/>
 
@@ -9,16 +10,15 @@ interface IDocsScope extends  IGenericListScope  {
     getAllForms():void;
     cancelDocs():void;
 
+
+
     forms:any;
     docs:any;
  }
 
 class DocsCtrl extends GenericListCtrl {
     constructor($scope: IDocsScope,Doc,Form,$location,$translate,$translatePartialLoader) {
-        super($scope);
-
-        $translatePartialLoader.addPart('docs');
-        $translate.refresh();
+        super($scope,$translate,$translatePartialLoader);
 
         $scope.newDoc = function(formId){
             if (formId != undefined) {

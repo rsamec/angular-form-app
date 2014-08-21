@@ -1,8 +1,8 @@
 ///<reference path='../../typings/underscore/underscore.d.ts'/>
-var Utils = (function () {
-    function Utils() {
+var AppUtils = (function () {
+    function AppUtils() {
     }
-    Object.defineProperty(Utils, "R_ISO8061_STR", {
+    Object.defineProperty(AppUtils, "R_ISO8061_STR", {
         get: function () {
             return /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?:\:?(\d\d)(?:\:?(\d\d)(?:\.(\d{3}))?)?)?(Z|([+-])(\d\d):?(\d\d)))?$/;
         },
@@ -16,12 +16,12 @@ var Utils = (function () {
     * @param obj
     * @returns {*} return obje, where
     */
-    Utils.transformDatesToISOString = function (obj) {
+    AppUtils.transformDatesToISOString = function (obj) {
         if (_.isDate(obj)) {
-            return Utils.toLocalISOString(obj);
+            return AppUtils.toLocalISOString(obj);
         } else if (_.isArray(obj) || _.isObject(obj)) {
             _.forEach(obj, function (val, name) {
-                obj[name] = Utils.transformDatesToISOString(val);
+                obj[name] = AppUtils.transformDatesToISOString(val);
             });
         }
         return obj;
@@ -33,12 +33,12 @@ var Utils = (function () {
     * @param obj source object
     * @returns {*}
     */
-    Utils.transformISOStringToDates = function (obj) {
+    AppUtils.transformISOStringToDates = function (obj) {
         if (_.isString(obj) && 15 <= obj.length && obj.length <= 24) {
-            return Utils.toLocalISODate(obj);
+            return AppUtils.toLocalISODate(obj);
         } else if (_.isArray(obj) || _.isObject(obj)) {
             _.forEach(obj, function (val, name) {
-                obj[name] = Utils.transformISOStringToDates(val);
+                obj[name] = AppUtils.transformISOStringToDates(val);
             });
         }
         return obj;
@@ -50,7 +50,7 @@ var Utils = (function () {
     * @param date
     * @returns {string}
     */
-    Utils.toLocalISOString = function (date) {
+    AppUtils.toLocalISOString = function (date) {
         var pad = function (number) {
             var r = String(number);
             if (r.length === 1) {
@@ -67,12 +67,12 @@ var Utils = (function () {
     * @param string
     * @returns {*}
     */
-    Utils.toLocalISODate = function (string) {
+    AppUtils.toLocalISODate = function (string) {
         var int = function (value) {
             return parseInt(value, 10);
         };
         var match;
-        if (match = string.match(Utils.R_ISO8061_STR)) {
+        if (match = string.match(AppUtils.R_ISO8061_STR)) {
             var date = new Date(0), tzHour = 0, tzMin = 0;
 
             //if (match[9]) {
@@ -85,5 +85,6 @@ var Utils = (function () {
         }
         return string;
     };
-    return Utils;
+    return AppUtils;
 })();
+//# sourceMappingURL=utils.js.map
