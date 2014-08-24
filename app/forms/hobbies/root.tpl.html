@@ -1,0 +1,24 @@
+<form class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-2 control-label">{{'Name' | translate}}:</label>
+
+        <div class="col-xs-4 col-sm-3 col-md-2">
+            <input type="text" class="form-control" placeholder="{{'FirstName' | translate}}"
+                   ng-model="va.model.Data.Person.FirstName"
+                   rule="va.model.PersonValidator">
+
+            <div class="validation-error">
+                {{va.model.PersonValidator.Rules["FirstName"].ErrorMessage}}
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+            <input type="text" class="form-control" placeholder="{{'LastName' | translate}}"
+                   ng-model="va.model.Data.Person.LastName"
+                   rule="va.model.PersonValidator">
+
+            <div class="validation-error">
+                {{va.model.PersonValidator.Rules["LastName"].ErrorMessage}}
+            </div>
+        </div>
+    </div>
+</form>

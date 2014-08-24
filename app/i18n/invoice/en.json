@@ -1,0 +1,8 @@
+{
+	"Data": "Invoice",
+	"Number": "Invoice number",
+	"Issued": "Issued date",
+
+    "Company":"Company"
+
+}

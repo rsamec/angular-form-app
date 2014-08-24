@@ -1,0 +1,15 @@
+{
+    "Data": "Hobbies",
+
+    "Person":"Person",
+    "FirstName": "Vorname",
+    "LastName": "Nachname",
+    "Email": "Email",
+
+    "Hobbies":"Hobbies",
+
+    "Name": "Name",
+    "Frequency":"Frequency",
+    "Paid":"Paid",
+    "Recommendation":"Recommendation"
+}

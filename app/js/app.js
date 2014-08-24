@@ -9,14 +9,18 @@ var app = angular.module('myApp', [
     'myApp.controllers',
     'mongolabResourceHttp',
     'ui.bootstrap',
-    'pascalprecht.translate',
-    'myApp.vacationApproval'
+    'pascalprecht.translate'
 ]);
 
 app.constant('MONGOLAB_CONFIG',
     {API_KEY: 'SX4PfDQhzWoek3EnS6FdYo-fWaxO7cQI', DB_NAME: 'documents'});
-app.config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider', '$translatePartialLoaderProvider',
-    function ($provide, $routeProvider, $httpProvider, $translateProvider, $translatePartialLoaderProvider) {
+app.config(['$controllerProvider', '$provide', '$routeProvider', '$httpProvider', '$translateProvider', '$translatePartialLoaderProvider',
+    function ($controllerProvider, $provide, $routeProvider, $httpProvider, $translateProvider, $translatePartialLoaderProvider) {
+
+        app.register = {
+            controller: $controllerProvider.register
+        };
+
 
         // Intercept http calls.
         $provide.factory('MyHttpInterceptor', function () {
@@ -60,7 +64,6 @@ app.config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider',
         });
 
 
-
         // Add the interceptor to the $httpProvider.
         $httpProvider.interceptors.push('MyHttpInterceptor');
 //    $httpProvider.defaults.transformResponse.push(function (responseData) {
@@ -74,7 +77,7 @@ app.config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider',
 
         $translatePartialLoaderProvider.addPart('docs');
         $translateProvider.useLoader('$translatePartialLoader', {
-            urlTemplate: '/i18n/{part}/{lang}.json'
+            urlTemplate: '/app/i18n/{part}/{lang}.json'
         });
 
 //    $translateProvider.useStaticFilesLoader({
@@ -86,37 +89,62 @@ app.config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider',
 
         _.extend(Validation.MessageLocalization.defaultMessages, Localization.ValidationMessages);
 
-        $routeProvider.when('/edit/:id', {templateUrl: 'partials/form.tpl.html', controller: 'VacationApprovalCtrl', controllerAs:'va',
-            resolve: {
-                docInstance: function ($route, Doc) {
+        var formCtrl = function (formId, docInstance) {
+            return {
+                controller: formId + "Ctrl",
+                templateUrl: 'partials/form.tpl.html',
+                controllerAs: 'va',
+                resolve: {
+                    docInstance: docInstance,
+                    load: function ($q, $route, $rootScope) {
+
+                        var deferred = $q.defer();
+
+                        //var formId =  $route.current.params.form;
+                        var dependencies = [
+                                'bower_components/business-rules/dist/' + formId + '/business-rules.js',
+                                'forms/' + formId + '/controllers.js'
+                        ];
+
+                        $script(dependencies, function () {
+                            $rootScope.$apply(function () {
+                                deferred.resolve();
+                            });
+                        });
+
+                        return deferred.promise;
+                    }
+                }
+            }
+        };
+        var newFormCtrl = function (formId) {
+            return formCtrl(formId,
+                function (Doc) {
+                    var doc = new Doc();
+                    doc.data = {};
+                    return doc;
+                })
+        };
+
+        var editFormCtrl = function (formId) {
+            return formCtrl(formId,
+                function ($route, Doc) {
                     return Doc.getById($route.current.params.id);
-                }
-            }
-        })
-        $routeProvider.when('/new/:id', {templateUrl: 'partials/form.tpl.html', controller: 'VacationApprovalCtrl', controllerAs:'va',
-            resolve: {
-                docInstance: function (Doc) {
-                    var doc = new Doc();
-                    doc.data = {};
-                    return doc;
-                }
-            }
-        })
-        $routeProvider.when('/new', {templateUrl: 'partials/form.tpl.html', controller: 'VacationApprovalCtrl',controllerAs:'va',
-            resolve: {
-                docInstance: function (Doc) {
-                    var doc = new Doc();
-                    doc.data = {};
-                    return doc;
-                }
-            }
-        });
+                })
+        };
+
+        $routeProvider.when('/vacationApproval/edit/:id', editFormCtrl("vacationApproval"));
+        $routeProvider.when('/hobbies/edit/:id', editFormCtrl("hobbies"));
+
+        $routeProvider.when('/vacationApproval/new', newFormCtrl("vacationApproval"));
+        $routeProvider.when('/hobbies/new', newFormCtrl("hobbies"));
+
         $routeProvider.when('/docs', {templateUrl: 'partials/docs.tpl.html', controller: 'DocsCtrl'});
         $routeProvider.when('/dashboard', {templateUrl: 'partials/dashboard.tpl.html', controller: 'VacationDashboardCtrl'});
         $routeProvider.otherwise({redirectTo: '/docs'});
     }]);
 
-$().ready(function() {
+$().ready(function () {
     /* For theme switching */
     var themeName = $.cookie("themeName");
     var themePath = $.cookie("themePath");
@@ -127,7 +155,7 @@ $().ready(function() {
 
 function setTheme(themeName, themePath) {
 
-    $('#bootstrapTheme').attr('href',themePath.substr(1) + "bootstrap.css");
+    $('#bootstrapTheme').attr('href', themePath.substr(1) + "bootstrap.css");
     $.cookie("themeName", themeName, { expires: 7, path: "/" });
     $.cookie("themePath", themePath, { expires: 7, path: "/" });
 }

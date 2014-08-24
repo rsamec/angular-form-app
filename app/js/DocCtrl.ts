@@ -20,23 +20,35 @@ interface IDocScope {
 }
 
 interface IBusinessRules{
-    Errors:any;//Validation.ValidationResult;
+    ValidationResult:any;//Validation.ValidationResult;
     Validate():Q.Promise<Validation.IValidationResult>;
+    Name:string;
 }
-
+var Localization:any;
 class DocCtrl implements IDocScope {
 
-
-    public name:string;
+    public get rootTemplateUrl():string {return "forms/" + this.name + "/root.tpl.html";}
+    public get name():string {return this.model.Name;}
     public version:string;
     public get created() {return this.data.created;}
     public get updated() {return this.data.updated;}
 
-    constructor(public model:IBusinessRules, public data:any) {
+    constructor($scope:any,public model:IBusinessRules, public data:any,  $translate, $translatePartialLoader) {
 
+        $translatePartialLoader.addPart(model.Name);
+        $translate.refresh();
+
+        $scope.changeLanguage = function (langKey) {
+            $translate.use(langKey);
+            $translate.refresh();
+            $.getScript("bower_components/business-rules-engine/dist/module/i18n/messages_" + langKey + ".js", function(){
+                _.extend(Validation.MessageLocalization.defaultMessages, Localization.ValidationMessages);
+                $scope.va.model.Validate();
+            })
+        };
     }
     public validate():Q.Promise<Validation.IValidationResult> {
-        this.model.Errors.SetDirty();
+        this.model.ValidationResult.SetDirty();
         return this.model.Validate();
     }
 
@@ -49,7 +61,7 @@ class DocCtrl implements IDocScope {
     }
 
     private saveEx(result){
-        if (this.model.Errors.HasErrors) {
+        if (this.model.ValidationResult.HasErrors) {
             return;
         }
         this.OnBeforeSave();

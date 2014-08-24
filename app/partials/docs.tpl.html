@@ -10,9 +10,8 @@
         <ul class="list-inline">
             <li class="list-group" ng-repeat="form in forms | filter:search.Text">
 
-                <a ng-dblclick="newDoc(form.$id())" class="list-group-item">
-                    <h4 class="list-group-item-heading">{{form.shortName | translate }}</h4>
-
+                <a ng-dblclick="newDoc(form.shortName)" class="list-group-item">
+                    <h4 class="list-group-item-heading">{{form.name | translate }}</h4>
                     <p class="list-group-item-text">{{form.desc | shorten}}</p>
 
                     <!--<p class="list-group-item-text">{{form.desc}}</p>-->

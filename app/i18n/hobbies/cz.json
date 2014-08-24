@@ -1,0 +1,15 @@
+{
+    "Data": "Záliby",
+
+    "Person":"Osoba",
+    "FirstName": "Jméno",
+    "LastName": "Příjmení",
+    "Email": "Email",
+
+    "Hobbies":"Hobbies",
+
+    "Name": "Name",
+    "Frequency":"Frequency",
+    "Paid":"Paid",
+    "Recommendation":"Recommendation"
+}

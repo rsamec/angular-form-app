@@ -3,12 +3,13 @@
 ///<reference path='../../../typings/jquery/jquery.d.ts'/>
 ///<reference path='../../../typings/underscore/underscore.d.ts'/>
 ///<reference path='../../js/DocCtrl.ts'/>
-///<reference path='../../bower_components/business-rules/dist/vacationApproval/business-rules.d.ts'/>
-var Localization:any;
+///<reference path='../../../typings/business-rules/vacationApproval.d.ts'/>
+
+
+var app:any;
 class VacationApprovalCtrl extends DocCtrl {
 
     public model:VacationApproval.BusinessRules;
-
 
     //vacation approval ctrl props
     public vacationDays:Array<any>;
@@ -19,29 +20,12 @@ class VacationApprovalCtrl extends DocCtrl {
     public openedFrom:boolean;
     public openedTo:boolean;
 
-    constructor($scope:any, data:any, $translate, $translatePartialLoader, param:any) {
-        super($scope, data);
 
-        $translatePartialLoader.addPart('vacationApproval');
-        $translate.refresh();
-
-        $scope.changeLanguage = function (langKey) {
-            $translate.use(langKey);
-            $translate.refresh();
-            $.getScript("bower_components/business-rules-engine/dist/module/i18n/messages_" + langKey + ".js", function(){
-               _.extend(Validation.MessageLocalization.defaultMessages, Localization.ValidationMessages);
-               $scope.va.model.Validate();
-            })
-        };
-
-
-
-        this.model = new VacationApproval.BusinessRules(this.data.data, param);
+    constructor($scope:any, docInstance:any,$translate, $translatePartialLoader, param:any) {
+        super($scope, new VacationApproval.BusinessRules(docInstance.data, param),docInstance, $translate, $translatePartialLoader);
 
         if (this.model.Data.Duration === undefined) this.model.Data.Duration = {From: new Date(), To: new Date()};
         if (this.model.Data.Deputy1 === undefined) this.model.Data.Deputy1 = {FirstName:undefined,LastName:undefined};
-
-        this.name = "VacationRequest";
 
         this.dateOptions = {
             formatYear: 'yy',
@@ -158,7 +142,6 @@ class VacationApprovalCtrl extends DocCtrl {
 
             this.model.Deputy1Validator.ValidateAll(target);
         }
-
     }
 
 
@@ -170,5 +153,8 @@ class VacationApprovalCtrl extends DocCtrl {
     }
 }
 
-angular.module('myApp.vacationApproval', [])
-    .controller('VacationApprovalCtrl', ['$scope','docInstance','$translate','$translatePartialLoader','param', VacationApprovalCtrl]);
+//angular.module('myApp.vacationApproval', [])
+//.controller('VacationApprovalCtrl', ['$scope','docInstance','$translate','$translatePartialLoader','param', VacationApprovalCtrl]);
+app.register.controller('vacationApprovalCtrl',VacationApprovalCtrl);
+//app.controller.$inject = ['$scope','docInstance','$translate','$translatePartialLoader','param'];
+
