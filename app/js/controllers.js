@@ -7,4 +7,3 @@ var setQ;
 angular.module('myApp.controllers', []).controller('ErrorCtrl', function ($scope, $translate, $q) {
     setQ($q);
 }).controller('DocsCtrl', DocsCtrl).controller('VacationDashboardCtr', VacationDashboardCtrl);
-//# sourceMappingURL=controllers.js.map
