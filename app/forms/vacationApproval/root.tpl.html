@@ -113,7 +113,7 @@
             </div>
         </div>
     </div>
-    <field rule="va.model.ApprovedByValidator" ng-model="va.model.Data.Approval.ApprovedBy.Email" label="Email"></field>
+    <field rule="va.model.ApprovedByValidator" ng-model="va.model.Data.Approval.ApprovedBy.Email" label="Email:"></field>
 
     <div class="form-group">
         <div class="col-xs-offset-2 col-xs-10">
@@ -151,7 +151,7 @@
             </div>
         </div>
     <div class="form-group">
-        <label class="col-xs-2 control-label">{{Email}}</label>
+        <label class="col-xs-2 control-label">Email:</label>
         <div class="col-xs-10 col-sm-7 col-md-5">
             <input type="text" class="form-control"  ng-model="va.model.Data.Deputy1.Email" ng-disabled="va.model.Data.Approval.ApprovedBy.Checked" placeholder="Email">
             <div ng-show="va.model.Deputy1Validator.ValidationResult.HasErrors" class="validation-error">

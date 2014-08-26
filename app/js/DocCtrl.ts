@@ -35,6 +35,7 @@ class DocCtrl implements IDocScope {
 
     constructor($scope:any,public model:IBusinessRules, public data:any,  $translate, $translatePartialLoader) {
 
+
         $translatePartialLoader.addPart(model.Name);
         $translate.refresh();
 
@@ -47,6 +48,7 @@ class DocCtrl implements IDocScope {
             })
         };
     }
+    public get isForm():boolean {return true;}
     public validate():Q.Promise<Validation.IValidationResult> {
         this.model.ValidationResult.SetDirty();
         return this.model.Validate();
@@ -65,7 +67,7 @@ class DocCtrl implements IDocScope {
             return;
         }
         this.OnBeforeSave();
-        this.data.$saveOrUpdate(this.createdSuccess, this.updatedSuccess, this.showError, this.showError);
+        this.data.$saveOrUpdate(this.createdSuccess.bind(this), this.updatedSuccess.bind(this), this.showError, this.showError);
     }
 
     private createdSuccess(response) {
@@ -88,5 +90,7 @@ class DocCtrl implements IDocScope {
         var today = new Date();
         if (this.data.created === undefined) this.data.created = today;
         this.data.updated = today;
+        this.data.name = this.model.Name;
+
     }
 }

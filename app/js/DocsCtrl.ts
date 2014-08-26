@@ -5,7 +5,7 @@
 
 interface IDocsScope extends  IGenericListScope  {
     newDoc(formId:string):void;
-    edit(docId:string):void;
+    edit(formId:string, docId:string):void;
     getAllDocs():void;
     getAllForms():void;
     cancelDocs():void;
@@ -21,14 +21,14 @@ class DocsCtrl extends GenericListCtrl {
         super($scope,$translate,$translatePartialLoader);
 
         $scope.newDoc = function(formId){
-            if (formId != undefined) {
+            if (formId !== undefined) {
                 $location.path("/" + formId + "/new");
             }
         }
 
-        $scope.edit = function(id){
-            var formId = "vacationApproval";
-            if (id != undefined) {
+        $scope.edit = function(formId, id){
+
+            if (formId !== undefined && id !== undefined) {
                 $location.path("/" + formId + "/edit/" + id);
             }
         }
@@ -63,4 +63,6 @@ class DocsCtrl extends GenericListCtrl {
 
         }
     }
+
+
 }

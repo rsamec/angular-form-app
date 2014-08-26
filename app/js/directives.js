@@ -20,7 +20,7 @@ uiControls.directive('rule', function ($timeout,$parse) {
             var parentModel = attrs.ngModel.substr(0,lastIndexOf);
             var propertyName = attrs.ngModel.substr(lastIndexOf + 1);
 
-            var rule = scope.$eval(attrs.rule)
+            var rule = scope.$eval(attrs.rule);
             var getter = $parse(parentModel);
 
             ctrl.$viewChangeListeners.push(function(){
@@ -59,6 +59,7 @@ uiControls.directive('field', function ($timeout,$parse) {
                 // update the local view
                 ctrl.$render();
             }
+            scope.label = attrs.label;
 
             bindToOnChanged(scope, inputs, attrs, updateModel);
 
@@ -127,7 +128,7 @@ uiControls.directive('error', function ($translate) {
                     if (scope.error.TranslateArgs.CustomMessage != undefined){
                         scope.errMsg = scope.error.TranslateArgs.CustomMessage(errMsg, scope.error.TranslateArgs.MessageArgs);
                     }else {
-                        scope.errMsg = Validation.StringFce.format(errMsg, scope.error.TranslateArgs.MessageArgs);
+                        scope.errMsg = Utils.StringFce.format(errMsg, scope.error.TranslateArgs.MessageArgs);
                     }},
                     function (reason) {
                         //fallback to default error message

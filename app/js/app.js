@@ -11,6 +11,11 @@ var app = angular.module('myApp', [
     'ui.bootstrap',
     'pascalprecht.translate'
 ]);
+var Q;
+var setQ  = function setQ(q)
+{
+    Q = q;
+}
 
 app.constant('MONGOLAB_CONFIG',
     {API_KEY: 'SX4PfDQhzWoek3EnS6FdYo-fWaxO7cQI', DB_NAME: 'documents'});
@@ -20,7 +25,6 @@ app.config(['$controllerProvider', '$provide', '$routeProvider', '$httpProvider'
         app.register = {
             controller: $controllerProvider.register
         };
-
 
         // Intercept http calls.
         $provide.factory('MyHttpInterceptor', function () {

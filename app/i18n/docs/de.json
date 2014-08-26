@@ -1,4 +1,6 @@
 {
+    "BusinessRules":"Business rules",
+    "Forms": "Formulare",
     "Documents": "Dokumente",
     "Dashboard": "Urlaubswandzeitung",
 
@@ -33,5 +35,18 @@
     "Language":"Sprache",
     "English":"englisch",
     "German":"deutsch",
-    "Czech":"tschechisch"
+    "Czech":"tschechisch",
+
+    "Row":"Zeile",
+    "Add":"Zusetzen",
+    "Errors": "Fehlers",
+
+    "Daily":"täglich",
+    "Weekly":"wöchentlich",
+    "Monthly":"monatlich",
+
+    "hobbies":"Hobby und Interesse",
+    "vacationApproval": "Urlaub anforderung",
+    "invoice":"Fakture"
+
 }

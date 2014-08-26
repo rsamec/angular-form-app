@@ -1,4 +1,6 @@
 {
+    "BusinessRules":"Business rules",
+    "Forms": "Forms",
     "Documents": "Documents",
     "Dashboard": "Vacation dashboard",
 
@@ -33,5 +35,13 @@
     "Language":"Language",
     "English":"English",
     "German":"German",
-    "Czech":"Czech"
+    "Czech":"Czech",
+
+    "Row":"Row",
+    "Add":"Add",
+    "Errors": "Errors",
+
+    "hobbies":"Hobbies",
+    "vacationApproval": "Vacation request",
+    "invoice":"Invoice"
 }

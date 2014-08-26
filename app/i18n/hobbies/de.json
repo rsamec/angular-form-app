@@ -1,15 +1,23 @@
 {
-    "Data": "Hobbies",
+    "Data": "Interesse",
 
     "Person":"Person",
     "FirstName": "Vorname",
     "LastName": "Nachname",
     "Email": "Email",
 
-    "Hobbies":"Hobbies",
+    "Hobbies":"Interesse und hobby",
 
-    "Name": "Name",
-    "Frequency":"Frequency",
-    "Paid":"Paid",
-    "Recommendation":"Recommendation"
+    "HobbyName": "Name",
+    "Frequency":"Frequenz",
+    "Paid":"Bezahlen",
+    "Recommendation":"Empfehlung",
+
+
+    "HobbiesCount":"InteresseZahl",
+    "HobbiesCountMin":"Schäme nicht und sagt us bitte mindestens 2 deine Interesse!.",
+    "HobbiesCountMax":"Geht nicht zu weit. 4 Interesse ist doch genug!",
+
+    "PaidLabel":"Bekommst du für das Hobby bezahlen?",
+    "RecommendationLabel":"Würdest du dieses Hobby einem Freund empfehlen?"
 }

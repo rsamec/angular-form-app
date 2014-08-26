@@ -9,12 +9,16 @@
 
     "Hobbies":"Hobbies",
 
-    "Name": "Name",
+    "HobbyName": "Name",
     "Frequency":"Frequency",
     "Paid":"Paid",
-    "Recommendation":"Recommendation"
+    "Recommendation":"Recommendation",
 
+    "HobbiesCount":"Hobbies number",
+    "HobbiesCountMin":"Come on, speak up. Tell us at least two things you enjoy doing",
+    "HobbiesCountMax":"Do not be greedy. Four hobbies are probably enough!",
 
-
+    "PaidLabel":"Is this a paid hobby?",
+    "RecommendationLabel":"Would you recommend this hobby to a friend?"
 
 }

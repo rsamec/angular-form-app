@@ -147,7 +147,6 @@ class VacationApprovalCtrl extends DocCtrl {
 
     public OnBeforeSave() {
         super.OnBeforeSave();
-        this.data.name = "VacationRequest";
         this.data.desc = this.model.Data.Employee.FirstName + " " + this.model.Data.Employee.LastName;
         this.model.Data.Duration.Days = this.model.Duration.VacationDaysCount;
     }

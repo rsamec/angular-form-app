@@ -20,6 +20,7 @@
     "angular-translate-loader-partial": "~2.0.1",
     "business-rules": "*",
     "business-rules-engine": "*",
-    "jquery.cookie": "~1.4.1"
+    "jquery.cookie": "~1.4.1",
+    "hashmap": "~1.1.0"
   }
 }

@@ -1,4 +1,6 @@
 {
+    "BusinessRules":"Obchodní pravidla",
+    "Forms": "Formuláře",
     "Documents": "Dokumenty",
     "Dashboard": "Nástěnka dovolenek",
 
@@ -25,7 +27,7 @@
     "SearchText": "Hledat",
 
 
-    "VacationRequest": "Dovolenka",
+    "VacationApproval": "Dovolenka",
     "Invoice":"Faktura",
 
     "Name": "Jméno a příjmení",
@@ -33,7 +35,21 @@
     "Language":"Jazyk",
     "English":"anglicky",
     "German":"německy",
-    "Czech":"česky"
+    "Czech":"česky",
+
+    "Row":"Řádek",
+    "Add":"Přidat",
+
+    "Errors": "Chyby",
+
+    "Daily":"denně",
+    "Weekly":"týdně",
+    "Monthly":"měsíčně",
+
+    "hobbies":"Záliby a koníčky",
+    "vacationApproval": "Dovolenka",
+    "invoice":"Faktura"
+
 
 
 }

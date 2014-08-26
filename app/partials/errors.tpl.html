@@ -1,11 +1,11 @@
-<div ng-show="va.model.Errors.HasErrorsDirty" class="form-summary-error">
+<div ng-show="va.model.ValidationResult.HasErrorsDirty" class="form-summary-error">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <span class="validation-error" style="font-weight: bold">{{va.model.Errors.ErrorCount}} {{'Errors'| translate }}</span>
+            <span class="validation-error" style="font-weight: bold">{{va.model.ValidationResult.ErrorCount}} {{'Errors'| translate }}</span>
         </div>
         <div class="panel-body">
             <ul style="list-style-type:none;padding-left:0px;">
-                <li ng-show="page.HasErrorsDirty" ng-repeat="page in va.model.Errors.Children">
+                <li ng-show="page.HasErrorsDirty" ng-repeat="page in va.model.ValidationResult.Children">
                     <span class="validation-error" style="cursor:pointer;font-weight: bold">{{page.Name | translate}}</span>
                     <ul style="list-style-type:none;padding-left:8px;">
                         <li ng-show="item.HasErrorsDirty" ng-repeat="item in page.Children">

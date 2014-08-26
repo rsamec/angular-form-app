@@ -22,6 +22,12 @@
     },
     "angularjs/angular.d.ts": {
       "commit": "c773444c7699a5f29963fed726e833daa3660bfc"
+    },
+    "hashmap/hashmap.d.ts": {
+      "commit": "3505d15d991ddaa4f5efa13edcd8543bae1e46de"
+    },
+    "node/node.d.ts": {
+      "commit": "3505d15d991ddaa4f5efa13edcd8543bae1e46de"
     }
   }
 }

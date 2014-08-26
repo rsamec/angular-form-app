@@ -1,24 +1,73 @@
 <form class="form-horizontal">
     <div class="form-group">
-        <label class="col-xs-2 control-label">{{'Name' | translate}}:</label>
+        <label class="col-xs-2 control-label">{{'Name' | translate}}</label>
 
         <div class="col-xs-4 col-sm-3 col-md-2">
             <input type="text" class="form-control" placeholder="{{'FirstName' | translate}}"
                    ng-model="va.model.Data.Person.FirstName"
-                   rule="va.model.PersonValidator">
+                   rule="va.model.MainValidator.Children['Person']">
 
             <div class="validation-error">
-                {{va.model.PersonValidator.Rules["FirstName"].ErrorMessage}}
+                {{va.model.MainValidator.Children["Person"].Rules["FirstName"].ErrorMessage}}
             </div>
         </div>
         <div class="col-xs-6 col-sm-4 col-md-3">
             <input type="text" class="form-control" placeholder="{{'LastName' | translate}}"
                    ng-model="va.model.Data.Person.LastName"
-                   rule="va.model.PersonValidator">
+                   rule="va.model.MainValidator.Children['Person']">
 
             <div class="validation-error">
-                {{va.model.PersonValidator.Rules["LastName"].ErrorMessage}}
+                {{va.model.MainValidator.Children["Person"].Rules["LastName"].ErrorMessage}}
             </div>
         </div>
     </div>
+    <field rule="va.model.MainValidator.Children['Person']" ng-model="va.model.Data.Person.Email" label="Email"></field>
+
+
+    <div class="row">
+        <div class="col-xs-2">
+            <div class="btn btn-primary" ng-click="va.addHobby()">
+                {{'Add'| translate}} +
+                <i class="fa fa-plus"></i>
+            </div>
+        </div>
+
+        <div class="col-xs-10">
+            <div error="va.model.HobbiesNumberValidator.Error"></div>
+        </div>
+    </div>
+    <div ng-repeat="hobby in va.model.Data.Hobbies">
+
+        <div class="form-group">
+            <label class="col-xs-2 control-label">{{'HobbyName' | translate}}</label>
+
+            <div class="col-xs-10 col-sm-7 col-md-5">
+
+                <div class="input-group">
+
+                    <input type="text" class="form-control" ng-model="hobby.HobbyName"
+                           placeholder="{{'HobbyName' | translate}}" rule="va.model.MainValidator.Children['Hobbies'].Rows[$index]">
+                     <span class="input-group-btn">
+                         <button class="btn btn-default" type="button" ng-click="va.removeHobby(hobby)">X</button>
+                        <!--<i class="fa fa-times"></i>-->
+                    </span>
+                </div>
+                <div ng-show="va.model.MainValidator.Children['Hobbies'].Rows[$index].ValidationResult.HasErrors"
+                     class="validation-error">
+                    {{va.model.MainValidator.Children['Hobbies'].Rows[$index].ValidationResult.ErrorMessage}}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">{{'Frequency' | translate}}</label>
+
+            <div class="col-xs-4 col-sm-3 col-md-2">
+                <select class="form-control" ng-model="va.model.Data.Hobbies[$index].Frequency"
+                        ng-options="obj.value as obj.text | translate for obj in va.hobbyFrequencyOptions">
+
+                </select>
+            </div>
+        </div>
+    </div>
+
 </form>
