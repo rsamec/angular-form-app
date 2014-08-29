@@ -46,7 +46,8 @@
                 <div class="input-group">
 
                     <input type="text" class="form-control" ng-model="hobby.HobbyName"
-                           placeholder="{{'HobbyName' | translate}}" rule="va.model.MainValidator.Children['Hobbies'].Rows[$index]">
+                           placeholder="{{'HobbyName' | translate}}"
+                           rule="va.model.MainValidator.Children['Hobbies'].Rows[$index]">
                      <span class="input-group-btn">
                          <button class="btn btn-default" type="button" ng-click="va.removeHobby(hobby)">X</button>
                         <!--<i class="fa fa-times"></i>-->
@@ -58,14 +59,40 @@
                 </div>
             </div>
         </div>
+
         <div class="form-group">
             <label class="col-xs-2 control-label">{{'Frequency' | translate}}</label>
 
-            <div class="col-xs-4 col-sm-3 col-md-2">
-                <select class="form-control" ng-model="va.model.Data.Hobbies[$index].Frequency"
+            <div style="display: table" class="col-xs-4 col-sm-3 col-md-2">
+
+                <select class="form-control"
+                        ng-model="va.model.Data.Hobbies[$index].Frequency"
                         ng-options="obj.value as obj.text | translate for obj in va.hobbyFrequencyOptions">
 
                 </select>
+                <span style="display: table-cell;padding-left: 20px;" class="glyphicon glyphicon-question-sign" popover="{{'FrequencyLabel' | translate}}"
+                     popover-trigger="mouseenter"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-xs-offset-2 col-xs-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="va.model.Data.Hobbies[$index].Paid" >{{'PaidLabel' |
+                        translate}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-offset-2 col-xs-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="va.model.Data.Hobbies[$index].Recommendation">{{'RecommendationLabel'
+                        | translate}}
+                    </label>
+                </div>
             </div>
         </div>
     </div>
