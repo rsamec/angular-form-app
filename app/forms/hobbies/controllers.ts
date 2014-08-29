@@ -11,8 +11,8 @@ class HobbiesCtrl extends DocCtrl {
     public model:Hobbies.BusinessRules;
 
 
-    constructor($scope:any, docInstance:any, $translate, $translatePartialLoader) {
-        super($scope, new Hobbies.BusinessRules(docInstance.data), docInstance, $translate, $translatePartialLoader);
+    constructor($scope:any, docInstance:any, $translate, $translatePartialLoader, alertService) {
+        super($scope, new Hobbies.BusinessRules(docInstance.data), docInstance, $translate, $translatePartialLoader,alertService);
 
         if (this.model.Data.Hobbies === undefined) this.model.Data.Hobbies = [{}];
 

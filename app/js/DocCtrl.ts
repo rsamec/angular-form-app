@@ -33,7 +33,12 @@ class DocCtrl implements IDocScope {
     public get created() {return this.data.created;}
     public get updated() {return this.data.updated;}
 
-    constructor($scope:any,public model:IBusinessRules, public data:any,  $translate, $translatePartialLoader) {
+
+
+    constructor($scope:any,public model:IBusinessRules, public data:any,  $translate, $translatePartialLoader, public alertService) {
+
+        // root binding for alertService
+        $scope.closeAlert = alertService.closeAlert;
 
 
         $translatePartialLoader.addPart(model.Name);
@@ -67,18 +72,23 @@ class DocCtrl implements IDocScope {
             return;
         }
         this.OnBeforeSave();
-        this.data.$saveOrUpdate(this.createdSuccess.bind(this), this.updatedSuccess.bind(this), this.showError, this.showError);
+        this.data.$saveOrUpdate(this.createdSuccess.bind(this), this.updatedSuccess.bind(this), this.saveFailed.bind(this), this.saveFailed.bind(this));
     }
 
     private createdSuccess(response) {
         if (!this.data.$id()) {
             this.data._id = response._id;
         }
+        this.alertService.add("success", "Document was succesfully saved.",2000);
     }
 
     private updatedSuccess(response) {
+        this.alertService.add("success", "Document was succesfully saved.",2000);
     }
 
+    public saveFailed(reason) {
+        this.alertService.add("danger", "Error encounters: " + reason,0);
+    }
     public showError(reason) {
         alert(reason);
     }

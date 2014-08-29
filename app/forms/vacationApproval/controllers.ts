@@ -21,8 +21,8 @@ class VacationApprovalCtrl extends DocCtrl {
     public openedTo:boolean;
 
 
-    constructor($scope:any, docInstance:any,$translate, $translatePartialLoader, param:any) {
-        super($scope, new VacationApproval.BusinessRules(docInstance.data, param),docInstance, $translate, $translatePartialLoader);
+    constructor($scope:any, docInstance:any,$translate, $translatePartialLoader,alertService, param:any) {
+        super($scope, new VacationApproval.BusinessRules(docInstance.data, param),docInstance, $translate, $translatePartialLoader,alertService);
 
         if (this.model.Data.Duration === undefined) this.model.Data.Duration = {From: new Date(), To: new Date()};
         if (this.model.Data.Deputy1 === undefined) this.model.Data.Deputy1 = {FirstName:undefined,LastName:undefined};

@@ -2,6 +2,9 @@
     <div ng-include src="'partials/header.tpl.html'"></div>
 </nav>
 
+<div>
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{ alert.msg }}</alert>
+</div>
 
 <div class="container-fluid">
     <div class="row well">
@@ -15,9 +18,9 @@
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-10">{{va.updated | successSave:'HH:mm:ss'}}</div>
+            <div class="col-xs-offset-2 col-xs-10">{{va.updated | successSave:'HH:mm:ss'}}</div>
         </div>
     </div>
 </nav>
