@@ -11,6 +11,7 @@ var app = angular.module('myApp', [
     'ui.bootstrap',
     'pascalprecht.translate'
 ]);
+
 var Q;
 var setQ  = function setQ(q)
 {
@@ -70,24 +71,10 @@ app.config(['$controllerProvider', '$provide', '$routeProvider', '$httpProvider'
 
         // Add the interceptor to the $httpProvider.
         $httpProvider.interceptors.push('MyHttpInterceptor');
-//    $httpProvider.defaults.transformResponse.push(function (responseData) {
-//        Utils.transformISOStringToDates(responseData);
-//        return responseData;
-//    });
-//    $httpProvider.defaults.transformRequest.push(function (reqeuestData) {
-//        Utils.transformDatesToISOString(reqeuestData);
-//        return reqeuestData;
-//    });
-
         $translatePartialLoaderProvider.addPart('docs');
         $translateProvider.useLoader('$translatePartialLoader', {
             urlTemplate: '/app/i18n/{part}/{lang}.json'
         });
-
-//    $translateProvider.useStaticFilesLoader({
-//        prefix: 'bower_components/node-form-models/dist/vacationApproval/i18n/',
-//        suffix: '.json'
-//    });
 
         $translateProvider.preferredLanguage('en');
 

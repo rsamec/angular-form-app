@@ -4,20 +4,58 @@
 
 /* Controllers */
 interface IDocScope {
-    validate(): Q.Promise<any>;
-    reset(): void;
-    showMessage(msg): void;
-    showError(reason): void;
+
+    /*
+    Return document data object.
+     */
+    data:any;
+    /*
+    Return document model (business rules).
+     */
+    model:IBusinessRules;
+
+    /*
+     Return form name.
+     */
+    name:string;
+    /*
+     Return form version.
+     */
+    version:string;
+    /*
+     Return document creation date.
+     */
+    created:Date;
+    /*
+     Return document last update date.
+     */
+    updated:Date;
+
+    /*
+    Executes all validation rules on form.
+     */
+    validate(): Q.Promise<Validation.IValidationResult>;
+
+    /*
+    It saves the document data to persistent repository.
+     */
     save():void;
 
-    data:any;
-    model:any;
+    /*
+    It resets all values to default state.
+     */
+    reset(): void;
+    /*
+    It displays user-friendly information message.
+     */
+    showMessage(msg): void;
+    /*
+    It displays user-friendly error message.
+     */
+    showError(reason): void;
 
-    name:string;
-    version:string;
-    created:Date;
-    updated:Date;
 }
+
 
 interface IBusinessRules{
     ValidationResult:any;//Validation.ValidationResult;
@@ -25,35 +63,45 @@ interface IBusinessRules{
     Name:string;
 }
 var Localization:any;
-class DocCtrl implements IDocScope {
+class DocCtrl implements IDocScope{
 
-    public get rootTemplateUrl():string {return "forms/" + this.name + "/root.tpl.html";}
-    public get name():string {return this.model.Name;}
-    public version:string;
-    public get created() {return this.data.created;}
-    public get updated() {return this.data.updated;}
+    get rootTemplateUrl():string {return "forms/" + this.name + "/root.tpl.html";}
 
-
-
-    constructor($scope:any,public model:IBusinessRules, public data:any,  $translate, $translatePartialLoader, public alertService) {
-
-        // root binding for alertService
-        $scope.closeAlert = alertService.closeAlert;
+    get name():string {return this.model.Name;}
+    version:string;
+    get created() {return this.data.created;}
+    get updated() {return this.data.updated;}
 
 
+
+    constructor(private $scope:ng.IScope,
+                public model:IBusinessRules,
+                public data:any,
+                private $translate,
+                private $translatePartialLoader,
+                private alertService) {
+
+        //load translation strings
         $translatePartialLoader.addPart(model.Name);
         $translate.refresh();
 
-        $scope.changeLanguage = function (langKey) {
+        // root binding for alertService
+        $scope["closeAlert"] = this.alertService.closeAlert;
+
+        // change language
+        $scope["changeLanguage"] = function (langKey) {
             $translate.use(langKey);
             $translate.refresh();
+
             $.getScript("bower_components/business-rules-engine/dist/module/i18n/messages_" + langKey + ".js", function(){
                 _.extend(Validation.MessageLocalization.defaultMessages, Localization.ValidationMessages);
-                $scope.va.model.Validate();
+                $scope["va"].model.Validate();
             })
         };
     }
+
     public get isForm():boolean {return true;}
+
     public validate():Q.Promise<Validation.IValidationResult> {
         this.model.ValidationResult.SetDirty();
         return this.model.Validate();

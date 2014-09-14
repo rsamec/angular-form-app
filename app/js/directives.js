@@ -10,21 +10,35 @@ var uiControls = angular.module('myApp.directives', []);
     };
   }]);
 
-uiControls.directive('rule', function ($timeout,$parse) {
+uiControls.directive('rule', function ($parse) {
     return {
         require:'ngModel',
         restrict: 'A',
         link: function (scope, element, attrs, ctrl) {
-            if (ctrl== undefined) return;
+            if (ctrl===undefined) return;
+
+            //parse ngModel expression
             var lastIndexOf = attrs.ngModel.lastIndexOf('.');
+            if (lastIndexOf === -1) return;
+
+            //set model expression
             var parentModel = attrs.ngModel.substr(0,lastIndexOf);
+            //set property name
             var propertyName = attrs.ngModel.substr(lastIndexOf + 1);
 
+            //create rule
             var rule = scope.$eval(attrs.rule);
+
+            //create parent getter
             var getter = $parse(parentModel);
 
+            //when value changed then validate property
             ctrl.$viewChangeListeners.push(function(){
+
+                //execute validation
                 rule.ValidateProperty(getter(scope),propertyName);
+
+                //set dirty flag for correct display
                 rule.ValidationResult.Errors[propertyName].IsDirty = true;
             });
         }
@@ -135,15 +149,12 @@ uiControls.directive('error', function ($translate) {
                         scope.errMsg = scope.error.ErrorMessage;
                     }
                 )
-            }
+            };
 
             setErrMsg();
-            scope.$watch('error.ErrorMessage', function (newValue, oldValue, scope)
-            {
+            scope.$watch('error.ErrorMessage', function (newValue, oldValue, scope) {
                 setErrMsg();
             }, true);
-
-
        }
     };
 });

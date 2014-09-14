@@ -1,25 +1,23 @@
 ///<reference path='../../../typings/angularjs/angular.d.ts'/>
-///<reference path='../../../typings/business-rules-engine/business-rules-engine.d.ts'/>
-///<reference path='../../../typings/jquery/jquery.d.ts'/>
-///<reference path='../../../typings/underscore/underscore.d.ts'/>
-///<reference path='../../js/DocCtrl.ts'/>
 ///<reference path='../../../typings/business-rules/hobbies.d.ts'/>
 
-var app:any;
+///<reference path='../../js/DocCtrl.ts'/>
 class HobbiesCtrl extends DocCtrl {
 
     public model:Hobbies.BusinessRules;
 
-
-    constructor($scope:any, docInstance:any, $translate, $translatePartialLoader, alertService) {
+    constructor($scope:ng.IScope, docInstance:any, $translate, $translatePartialLoader, alertService) {
         super($scope, new Hobbies.BusinessRules(docInstance.data), docInstance, $translate, $translatePartialLoader,alertService);
 
+        //fill list of hobbies with one empty item to indicate there are some hobbies to fill in
         if (this.model.Data.Hobbies === undefined) this.model.Data.Hobbies = [{}];
-
-        this.model.MainValidator.Children["Hobbies"].RefreshRows(this.model.Data.Hobbies);
+        this.notifyCollectionChanged(true);
     }
 
-    public get hobbyFrequencyOptions() {
+    /*
+    Return hobbies frequency options.
+     */
+    get hobbyFrequencyOptions() {
         return [
             {text: 'Daily', value: Hobbies.HobbyFrequency.Daily},
             {text: 'Weekly', value: Hobbies.HobbyFrequency.Weekly},
@@ -27,27 +25,41 @@ class HobbiesCtrl extends DocCtrl {
         ];
     }
 
-    public addHobby() {
+
+    /*
+    Add new hobby to list of hobbies.
+     */
+    addHobby() {
         this.model.Data.Hobbies.push({});
-        this.RefreshRows();
+        this.notifyCollectionChanged();
     }
 
-    public removeHobby(hobby) {
+    /*
+    Remove selected hobby from list of hobbies.
+     */
+    removeHobby(hobby) {
         this.model.Data.Hobbies.splice(
             this.model.Data.Hobbies.indexOf(hobby), 1);
-        this.RefreshRows();
+        this.notifyCollectionChanged();
 
     }
 
-    public OnBeforeSave() {
+    /*
+    Hook function for actions before saving is done.
+    */
+    OnBeforeSave() {
         super.OnBeforeSave();
         this.data.desc = this.model.Data.Person.FirstName + " " + this.model.Data.Person.LastName;
     }
 
-    private RefreshRows(){
+    /*
+    Notify that collection was changed. Conditionally call validation for collection.
+     */
+    private notifyCollectionChanged(ignoreValidation?:boolean){
         this.model.MainValidator.Children["Hobbies"].RefreshRows(this.model.Data.Hobbies);
-        this.model.HobbiesNumberValidator.Validate(this.model.Data);
+        if (!ignoreValidation)this.model.HobbiesNumberValidator.Validate(this.model.Data);
     }
 }
 
+var app:any;
 app.register.controller('hobbiesCtrl', HobbiesCtrl);
